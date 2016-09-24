@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Manutencao de computadores, smartphones, notebooks e tablets.">
+		<meta name="author" content="CJR">
+
+		<title>CJR</title>
+
+		<!-- Bootstrap Core CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom CSS -->
+		<link href="css/stylish-portfolio.css" rel="stylesheet">
+
+		<!-- Custom Fonts -->
+		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+		<!--[if lt IE 9]>
+				<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+				<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+</head>
+
+<body>
+
+		<!-- Navigation -->
+		<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+		<nav id="sidebar-wrapper">
+				<ul class="sidebar-nav">
+						<a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+						<li class="sidebar-brand">
+								<a href="#index.html" onclick=$("#menu-close").click();>CJR</a>
+						</li>
+						<li>
+								<a href="index.html" onclick=$("#menu-close").click();>Serviços</a>
+						</li>
+						<li>
+								<a href="index.html" onclick=$("#menu-close").click();>Sobre</a>
+						</li>
+						<li>
+								<a href="cadastro.html" onclick=$("#menu-close").click();>Fidelidade</a>
+						</li>
+						<li>
+								<a href="cadastro.html" onclick=$("#menu-close").click();>Minha Conta</a>
+						</li>
+				</ul>
+		</nav>
+
+	<!-- Cadastro -->
+	<div class="container">
+
+		<br> <br>
+
+			<form class="form-signin col-xs-12 .col-sm-12 .col-md-9">
+
+				<h2 class="form-signin-heading">Cadastre-se para continuar:</h2>
+				<br>
+				<label for="nome" class="sr-only">Nome</label>
+				<input type="name" id="nome" class="form-control" placeholder="Nome" required="" autofocus="">
+				<br>
+				<label for="email" class="sr-only">Email</label>
+				<input type="email" id="email" class="form-control" placeholder="Email" required="">
+				<br>
+				<label for="senha" class="sr-only">Senha</label>
+				<input type="password" id="senha" class="form-control" placeholder="Senha" required="">
+				<br>
+				<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
+
+			</form>
+
+		</div>
+
+		<br> <br> 
+
+		<!-- PopUp do login -->
+		<div id="myModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Entre com sua conta:</h4>
+					</div>
+
+					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9">
+						<br>
+						<label for="email" class="sr-only">Email</label>
+						<input type="email" id="email" class="form-control" placeholder="Email" required="">
+						<br>
+						<label for="senha" class="sr-only">Senha</label>
+						<input type="password" id="senha" class="form-control" placeholder="Senha" required="">
+						<br>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+
+						<br>
+
+					</form>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+		<!-- Footer -->
+		<footer>
+				<div class="container">
+						<div class="row">
+								<div class="col-lg-10 col-lg-offset-1 text-center">
+									<!-- Botão que abre o login -->
+									<button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#myModal">Já foi cadastrado?</button>
+								</div>
+						</div>
+				</div>
+				<a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
+		</footer>
+
+		<!-- jQuery -->
+		<script src="js/jquery.js"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="js/bootstrap.min.js"></script>
+
+		<!-- Custom Theme JavaScript -->
+		<script>
+		// Closes the sidebar menu
+		$("#menu-close").click(function(e) {
+				e.preventDefault();
+				$("#sidebar-wrapper").toggleClass("active");
+		});
+		// Opens the sidebar menu
+		$("#menu-toggle").click(function(e) {
+				e.preventDefault();
+				$("#sidebar-wrapper").toggleClass("active");
+		});
+		//#to-top button appears after scrolling
+		var fixed = false;
+		$(document).scroll(function() {
+				if ($(this).scrollTop() > 250) {
+						if (!fixed) {
+								fixed = true;
+								// $('#to-top').css({position:'fixed', display:'block'});
+								$('#to-top').show("slow", function() {
+										$('#to-top').css({
+												position: 'fixed',
+												display: 'block'
+										});
+								});
+						}
+				} else {
+						if (fixed) {
+								fixed = false;
+								$('#to-top').hide("slow", function() {
+										$('#to-top').css({
+												display: 'none'
+										});
+								});
+						}
+				}
+		});
+		</script>
+
+</body>
+
+</html>

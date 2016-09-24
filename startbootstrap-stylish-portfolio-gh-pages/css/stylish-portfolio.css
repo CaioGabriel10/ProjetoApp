@@ -165,13 +165,13 @@ hr.small {
 /* About */
 
 .about {
-    padding: 50px 0;
+    padding: 25px 0;
 }
 
 /* Services */
 
 .services {
-    padding: 50px 0;
+    padding: 25px 0;
 }
 
 .service-item {
@@ -192,24 +192,6 @@ hr.small {
     -o-background-size: cover;
 }
 
-/* Portfolio */
-
-.portfolio {
-    padding: 50px 0;
-}
-
-.portfolio-item {
-    margin-bottom: 30px;
-}
-
-.img-portfolio {
-    margin: 0 auto;
-}
-
-.img-portfolio:hover {
-    opacity: 0.8;
-}
-
 /* Call to Action */
 
 .call-to-action {
@@ -220,26 +202,10 @@ hr.small {
     margin: 10px;
 }
 
-/* Map */
-
-.map {
-    height: 500px;
-}
-
-@media(max-width:768px) {
-    .map {
-        height: 75%;
-    }
-}
-
-.map iframe {
-    pointer-events: none;
-}
-
 /* Footer */
 
 footer {
-    padding: 100px 0;
+    padding: 25px 0;
 }
 
 #to-top {
