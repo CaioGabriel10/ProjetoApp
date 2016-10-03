@@ -56,18 +56,18 @@
 		<br> <br>
 			<div class="row">
 				<div class="col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2 ">
-					<form class="form-signin" method="POST" action="javascript:enviarRegisto();">
+					<form class="form-signin" method="POST" action="php/inserir-conta.php">
 
 						<h2 class="form-signin-heading">Cadastre-se para continuar:</h2>
 						<br>
 						<label for="nome" class="sr-only">Nome</label>
-						<input type="name" id="nome" name="nome" class="form-control" placeholder="Nome" required="" autofocus="">
+						<input type="name"  name="nome" class="form-control" placeholder="Nome" required="" autofocus="">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email" id="email" name="email"class="form-control" placeholder="Email" required="">
+						<input type="email"  name="email"class="form-control" placeholder="Email" required="">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password" id="senha" name="senha"class="form-control" placeholder="Senha" required="">
+						<input type="password"  name="senha"class="form-control" placeholder="Senha" required="">
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
 
@@ -91,18 +91,18 @@
 						<h4 class="modal-title">Entre com sua conta:</h4>
 					</div>
 
-					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9">
+					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="php/inserir-conta.php">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email" id="email" class="form-control" placeholder="Email" required="">
+						<input type="email" id="email" name="email" class="form-control" placeholder="Email" required="">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password" id="senha" class="form-control" placeholder="Senha" required="">
+						<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required="">
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-
+						
 						<br>
-
+						<input type="hidden" name="nome" value="none">
 					</form>
 
 					<div class="modal-footer">

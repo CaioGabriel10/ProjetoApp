@@ -3,13 +3,13 @@
 
 <head>
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
+  		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="Manutencao de computadores, smartphones, notebooks e tablets.">
+		<meta name="author" content="CJR">
 
-    <title>CJR-área cliente</title>
+		<title>CJR-area cliente</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -20,7 +20,7 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+    <script src="js/script.js"></script>
 </head>
 
 <body>
@@ -48,13 +48,13 @@
         <h1>Faça novos pedidos<small> :)</small></h1>
     </div>
     <!--novo pedido-->
-    <form method="post" action="#">
+    <form  action="javascript:enviarRegisto();">
         <div class="form-group ">
             <div class="row">
                 <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
                     <div class="input-group ">
                         <div class="input-group-addon" >aparelho</div>
-                        <select class="form-control" name="servico">
+                        <select class="form-control" id="aparelho" name="aparelho">
                         <option>selecione</option>
                         <option value="computador">computador</option>
                         <option value="notebook">notebook</option>
@@ -66,14 +66,13 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
                     <div class="input-group">
-                        <div class="input-group-addon">Sistema operacional</div>
-                        <select class="form-control" name="servico">
+                        <div class="input-group-addon">Serviço</div>
+                        <select class="form-control" id="servico" name="servico">
                         <option>selecione</option>
-                        <option value="windowns">windowns</option>
-                        <option value="linux">linux</option>
-                        <option value="android">android</option>
-                        <option value="ios">IOS</option>
-                        <option value="outro">outro</option>
+                        <option value="formatacao">formatação</option>
+                        <option value="limpeza">limpeza</option>
+                        <option value="assitencia-tecnica">assistencia tecnica</option>
+                        <option value="troca-de-peca">troca de peça</option>
                         </select>
                     </div>
                     <br>
@@ -83,7 +82,7 @@
                 <div class="col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                     <div class="input-group">
                         <div class="input-group-addon">descrição</div>
-                        <textarea class="form-control" name="descricao" rows="5" placeholder="descreva o problema em seu aparelho"></textarea>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="descreva o problema em seu aparelho"></textarea>
                     </div>
                 </div>
             </div>
@@ -95,13 +94,16 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+                <div class='alert alert-info alert-dismissible ' role='alert'>
+                    <div id="textDiv"></div>
+                </div>
+            </div>
+            </div>
         </div>
     </form>
 </div>
-
-
-  
-
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>

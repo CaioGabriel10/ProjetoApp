@@ -1,7 +1,8 @@
 <?php
     try{
-        $pdo = new PDO("mysql:host=mysql.hostinger.com.br;dbname=u692230175_app","u692230175_app1","123456");
+        $pdo = new PDO('mysql:host=localhost;dbname=app_teste','root','ROOT');
     }catch(PDOException $e){
         echo $e->getMessage();
     }
 ?>
+

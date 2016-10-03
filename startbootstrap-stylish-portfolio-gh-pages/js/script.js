@@ -8,15 +8,15 @@ function enviarRegisto() {
 	 * dos inputs com os id's em questão.
 	 */
 
-	nome = 'nome=' + $('#nome').val();
-	email = 'email=' + $('#email').val();
-	senha = 'senha=' + $('#senha').val();
+	aparelho = 'aparelho=' + $('#aparelho').val();
+	servico = 'servico=' + $('#servico').val();
+	descricao = 'descricao=' + $('#descricao').val();
 
 	/*
 	 * Criação da variável data que vai conter toda a informação
 	 * a enviar para o servidor.
 	 */
-	data = nome + '&' + email + '&' + senha;
+	data = aparelho + '&' + servico + '&' + descricao;
 
 	//Começa aqui o pedido ajax
 	$.ajax({
@@ -26,7 +26,7 @@ function enviarRegisto() {
          * URL do ficheiro que para o qual iremos enviar os dados. 
          * Pode ser um url absoluto ou relativo.
          */
-        url: '../php/inserir-conta.php', 
+        url: 'php/pedido.php', 
         //Que dados vamos enviar? A variável "data"
         data: data,
         //O tipo da informação da resposta
