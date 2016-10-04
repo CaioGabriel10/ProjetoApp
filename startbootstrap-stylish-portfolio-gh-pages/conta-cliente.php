@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php 
+    include('php/restrito.php');
+?>
 <html lang="pt-BR">
 
 <head>
@@ -31,43 +34,52 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand" role="presentation">
-                <a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">home</a>
+                <a href="area-cliente.php">home</a>
             </li>
-            <li role="presentation" ><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pedidos</a></li>
-            <li role="presentation" ><a href="#pontos" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pontos</a></li>
-            <li><a href="novo-pedido.html">novo pedido</a></li>
-            <li><a href="conta-cliente.html"> minha conta</a></li>
-            <li><a href="#">sair</a></li>
+            <li><a href="novo-pedido.php">novo pedido</a></li>
+            <li><a href="conta-cliente.php"> minha conta</a></li>
+            <li><a href="php/restrito.php?out=true">sair</a></li>
         </ul>
     </nav>
 <div class="container">
 <div class="bs-example bs-example-tabs" data-example-id="togglable-tabs"> 
-    <ul class="nav nav-tabs  " id="myTabs" role="tablist"> 
+
+    <!-- abas conta cliente-->
+     <ul class="nav nav-tabs  " id="myTabs" role="tablist"> 
         <li role="presentation" class="active" ><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-home" aria-hidden="true"></i></a></li>
-        <li role="presentation" ><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false"><i class="fa fa-pencil" aria-hidden="true"></i></a></li> 
-        <li role="presentation" ><a href="#pontos" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false"><i class="fa fa-trophy" aria-hidden="true"></i></a></li> 
+        <li role="presentation" ><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>  
     </ul>
+
     <div class="tab-content" id="myTabContent"> 
         <div class="tab-pane fade active in" role="tabpanel" id="home1" aria-labelledby="home-tab1">
             <!--localizacao na area do cliente-->
             <ol class="breadcrumb">
             <li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-             <li><a href="#">area-cliente</a></li>
-            <li><a href="#">home</a></li>
+            <li><a href="area-cliente.php">area-cliente</a></li>
+            <li><a href="#">minha conta</a></li>
             </ol>
+            <div class="page-header">
+                 <h1>Gerencie sua conta<small> :)</small></h1>
+            </div>
+            <blockquote>
+                <p>Bem-vindo <strong>Fulano nnnnn nn nnnnnn</strong></p>
+            </blockquote>
             <!--icons com numero de ponto, etc-->
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="jumbotron">
                         <p class=" text-center" >
-                            <i class="fa fa-trophy fa-5x"></i></span> <span class="badge">4 pontos</span>
+                             <i class="fa fa-lock fa-5x"></i></span> <span class="badge"><i class="fa fa-check"></i></span>
                        </p>
+                       <ul class="list-unstyled">
+                          <li class="text-center"> Dados de segurança alterados em  <span class="label label-default ">10/02/2016</span><li>
+                        </ul>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="jumbotron">
                         <p class=" text-center">
-                            <i class="fa fa-pencil fa-5x"></i></span> <span class="badge">4</span>
+                            <i class="fa fa-cogs fa-5x"></i></span> <span class="badge">sem ideia</span>
                        </p>
                     </div>
                 </div>
@@ -112,116 +124,67 @@
                 </div>
             </div>
         </div> 
-        <!-- tela de pedidos-->
+        <!-- aba atualizar dados-->
         <div class="tab-pane fade" role="tabpanel" id="profile1" aria-labelledby="profile-tab1"> 
             <ol class="breadcrumb">
             <li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-             <li><a href="#">area-cliente</a></li>
-            <li><a href="#">pedidos</a></li>
+            <li><a href="#">minha conta</a></li>
             </ol>
-                
-          
             <div class="page-header">
-                <h2>Seus pedidos</h2>
+                <h2>Atualize seus dados </h2>
             </div>
-            <!--tabela de pedidos-->
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>aparelho</th>
-                            <th>data</th>
-                            <th>status</th>
-                            <th>ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>pc</td>
-                            <td>2016/07/01</td>
-                            <td>finalizado</td>
-                            <td>
-                                <button class="btn btn-info btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></button>
-                                <button class="btn btn-danger btn-xs"> <i class="fa fa-comment" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>pc</td>
-                            <td>2016/07/01</td>
-                            <td>finalizado</td>
-                            <td>
-                                <button class="btn btn-info btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></button>
-                                <button class="btn btn-danger btn-xs"> <i class="fa fa-comment" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>smartphone</td>
-                            <td>2016/07/01</td>
-                            <td>finalizado</td>
-                            <td>
-                                <button class="btn btn-info btn-xs"><i class="fa fa-ban" aria-hidden="true"></i></button>
-                                <button class="btn btn-danger btn-xs"> <i class="fa fa-comment" aria-hidden="true"></i></button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-            <!--pontos-->
-            <div class="tab-pane fade " role="tabpane3" id="pontos" aria-labelledby="home-tab1">
-                <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-                <li><a href="#">area-cliente</a></li>
-                <li><a href="#">pontos</a></li>
-                </ol>
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                        <div class="jumbotron">
-                            <p class=" text-center" >
-                                <i class="fa fa-trophy fa-5x"></i></span> <span class="badge">4 pontos</span>
-                        </p>
+                <form method="post" action="#">
+                    <div class="form-group ">
+                       <div class="row">
+                            <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 espaco">
+                                <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-user fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="nome" id="nome" type="text" placeholder="fulano nnnn nn nnnnn" maxlength="60">
+                                </div>
+                                 <br>    
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 espaco">
+                                <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="email" id="email" type="email" placeholder="fulano@gmail.com" maxlength="60">
+                                </div>
+                            </div>
                         </div>
+                        <br>
+                         <div class="row">
+                            <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 espaco">
+                                <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="senha" id="senha" type="password" placeholder="nova sevha" maxlength="60">
+                                </div>
+                                 <br>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 espaco">
+                                <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="senha" id="senha" type="text" placeholder="confirme nova senha" maxlength="60">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 espaco">
+                                <div class="input-group">
+                                <div class="input-group-addon"><i class="fa fa-lock fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="senhat" id="senhat" type="password" placeholder="senha atual" maxlength="60">
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 espaco">
+                                <div class="input-group">
+                                <button class="btn btn-default" type="submit">atualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                       
                     </div>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>data</th>
-                                <th>status</th>
-                                <th>ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>pc</td>
-                                <td>2016/07/01</td>
-                                <td>finalizado</td>
-                                <td>+</td>
-                            </tr>
-                            <tr>
-                                <td>pc</td>
-                                <td>2016/07/01</td>
-                                <td>finalizado</td>
-                                <td>+</td>
-                            </tr>
-                            <tr>
-                                <td>smartphone</td>
-                                <td>2016/07/01</td>
-                                <td>finalizado</td>
-                                <td>+</td>
-                            </tr>
-                            <tr>
-                                <td>notebook</td>
-                                <td>2016/07/01</td>
-                                <td>finalizado</td>
-                                <td>+</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-           </div> 
+                </form>
+            </div>
         </div> 
     </div> 
 </div>

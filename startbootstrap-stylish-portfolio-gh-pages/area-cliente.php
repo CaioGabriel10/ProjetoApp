@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <?php 
-	ob_start();
-	session_start();
+	include('php/restrito.php');
 ?>
 <html lang="pt-BR">
 
@@ -39,9 +38,9 @@
 						</li>
 						<li role="presentation" ><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pedidos</a></li>
 						<li role="presentation" ><a href="#pontos" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pontos</a></li>
-						<li><a href="novo-pedido.html">novo pedido</a></li>
-						<li><a href="conta-cliente.html"> minha conta</a></li>
-						<li><a href="#">sair</a></li>
+						<li><a href="novo-pedido.php">novo pedido</a></li>
+						<li><a href="conta-cliente.php"> minha conta</a></li>
+						<li><a href="php/restrito.php?out=true">sair</a></li>
 				</ul>
 		</nav>
 <div class="container">
@@ -79,9 +78,13 @@
 								
 						<div class="page-header">
 								<h2>Notícias<small> nnnnnnn n</small></h2>
-								<!-- PARA TESTE DE SESSAO-->
 							<?php 
-								 print_r($_SESSION['usuarioSession']);
+								 //msg de teste 
+								echo  $_SESSION['usuarioSession'];
+
+								echo $_COOKIE["cookie_pass"];
+								$la=$_COOKIE["cookie_user"];
+								echo $la;
 							?>
 						</div>
 						<div class="row">

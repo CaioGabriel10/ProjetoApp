@@ -1,4 +1,11 @@
 <!DOCTYPE html>
+<?php 
+    include('php/restrito.php');
+                //msg de teste 
+                echo $_COOKIE["cookie_pass"];
+                $la=$_COOKIE["cookie_user"];
+                echo $la;
+?>
 <html lang="pt-BR">
 
 <head>
@@ -31,17 +38,17 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand" role="presentation">
-                <a href="area-cliente.html">home</a>
+                <a href="area-cliente.php">home</a>
             </li>
-            <li><a href="novo-pedido.html">novo pedido</a></li>
-            <li><a href="conta-cliente.html"> minha conta</a></li>
-            <li><a href="#">sair</a></li>
+            <li><a href="novo-pedido.php">novo pedido</a></li>
+            <li><a href="conta-cliente.php"> minha conta</a></li>
+            <li><a href="php/restrito.php?out=true">sair</a></li>
         </ul>
     </nav>
 <div class="container"> 
     <ol class="breadcrumb">
     <li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-    <li><a href="area-cliente.html">area-cliente</a></li>
+    <li><a href="area-cliente.php">area-cliente</a></li>
     <li><a href="#">novos-pedidos</a></li>
     </ol>
     <div class="page-header">

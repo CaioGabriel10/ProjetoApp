@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+<?php
+ob_start();
+session_start();
+
+if(isset($_COOKIE['cookie_user']) AND isset($_COOKIE['cookie_pass'])){
+	header("Location: novo-pedido.php");
+
+}else if(isset($_SESSION['usuarioSession'])){
+
+	header("Location: novo-pedido.php");
+
+}else{	
+	unset($_SESSION["usuarioSession"]);
+	session_destroy();
+}
+//msg de teste 
+var_dump($_COOKIE);
+?>
 <html lang="pt-br">
 
 <head>
@@ -56,18 +74,18 @@
 		<br> <br>
 			<div class="row">
 				<div class="col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2 ">
-					<form class="form-signin" method="POST" action="php/inserir-conta.php">
+					<form class="form-signin" method="POST" action="javascript:cadastro();">
 
 						<h2 class="form-signin-heading">Cadastre-se para continuar:</h2>
 						<br>
 						<label for="nome" class="sr-only">Nome</label>
-						<input type="name"  name="nome" class="form-control" placeholder="Nome" required="" autofocus="">
+						<input type="name"  id="nome" name="nome" class="form-control" placeholder="Nome" required="" autofocus="">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email"  name="email"class="form-control" placeholder="Email" required="">
+						<input type="email"  id="email" name="email"class="form-control" placeholder="Email" required="">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password"  name="senha"class="form-control" placeholder="Senha" required="">
+						<input type="password"  id="senha" name="senha"class="form-control" placeholder="Senha" required="">
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
 
@@ -91,22 +109,32 @@
 						<h4 class="modal-title">Entre com sua conta:</h4>
 					</div>
 
-					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="php/inserir-conta.php">
+					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email" id="email" name="email" class="form-control" placeholder="Email" required="">
+						<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password" id="senha" name="senha" class="form-control" placeholder="Senha" required="">
+						<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Senha" required="">
+						<br> 
+						<div class="checkbox">
+							<label>
+							<input type="checkbox" id="Mlogado" name="Mlogado" value="1"> manter-se logado
+							</label>
+						</div>
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 						
 						<br>
-						<input type="hidden" name="nome" value="none">
+						<input type="hidden" id="Lnome" name="Lnome" value="none">
 					</form>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+					</div>
+					<br>
+					<div class='alert alert-info alert-dismissible ' role='alert'>
+						<div id="textDivLogin"></div>
 					</div>
 				</div>
 
