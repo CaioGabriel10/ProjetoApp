@@ -23,6 +23,7 @@
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="js/script.js"></script>
 
 </head>
 
@@ -133,54 +134,37 @@
             <div class="page-header">
                 <h2>Atualize seus dados </h2>
             </div>
-                <form method="post" action="#">
-                    <div class="form-group ">
+                <form method="POST" action="./php/atualizarConta.php">
+                    <div class="form-group col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2">
                        <div class="row">
-                            <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 espaco">
                                 <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-user fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="nome" id="nome" type="text" placeholder="fulano nnnn nn nnnnn" maxlength="60">
+                                <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="senhaA" id="senhaA" type="password" placeholder="Sua Senha Atual" maxlength="50">
                                 </div>
-                                 <br>    
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 espaco">
-                                <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="email" id="email" type="email" placeholder="fulano@gmail.com" maxlength="60">
-                                </div>
-                            </div>
+                                <br> 
                         </div>
                         <br>
                          <div class="row">
-                            <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 espaco">
                                 <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senha" id="senha" type="password" placeholder="nova sevha" maxlength="60">
+                                <div class="input-group-addon"><i class="fa fa-user fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="nome" id="nome" type="text" placeholder="Seu Nome" maxlength="50">
                                 </div>
-                                 <br>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 espaco">
-                                <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senha" id="senha" type="text" placeholder="confirme nova senha" maxlength="60">
-                                </div>
-                            </div>
+                                <br>    
                         </div>
                         <br>
                         <div class="row">
-                            <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2 espaco">
                                 <div class="input-group">
-                                <div class="input-group-addon"><i class="fa fa-lock fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senhat" id="senhat" type="password" placeholder="senha atual" maxlength="60">
+                                <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
+                                <input class="form-control" name="senha" id="senha" type="password" placeholder="Nova Senha" maxlength="50">
                                 </div>
                                 <br>
-                            </div>
-                            <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 espaco">
-                                <div class="input-group">
-                                <button class="btn btn-default" type="submit">atualizar</button>
-                                </div>
-                            </div>
                         </div>
+                        <br>
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Atualizar</button>
+                        <br>
+                        <div class='alert alert-info alert-dismissible ' role='alert'>
+                            <div id="textDiv"></div>
+                        </div>  
                        
                     </div>
                 </form>
