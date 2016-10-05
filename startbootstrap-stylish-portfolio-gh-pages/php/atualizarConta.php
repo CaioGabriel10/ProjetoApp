@@ -3,11 +3,11 @@
 	ob_start();
 	session_start();
 
-  include('conexao.php');
-  $conexao = $pdo;
+	include('conexao.php');
+	$conexao = $pdo;
 
-  //RESULTADO QUE SERÁ EXIBIDO NA DIV DE ID=textDiv.
-  $resultado =  array();
+	//RESULTADO QUE SERÁ EXIBIDO NA DIV DE ID=textDiv.
+	$resultado =  array();
 
 	//PEGANDO ID DO USUARIO PARA ATUALIZAR.
 	$email = $_SESSION['usuarioSession'];
@@ -38,23 +38,17 @@
 			$atualizaCliente->bindValue(":senha",$senha);
 			$atualizaCliente->bindValue(":cliente",$id_cliente);
 			$atualizaCliente->execute();
-			$resultado['status'] = true;
-			echo "SUCESSO! - DADOS ATUALIZADOS ᕦ(ò_óˇ)ᕤ";
-			echo "<p><a href='../conta-cliente.php'>	VOLTAR!	</a></p>";
+			$resultado['status'] = 1;
 		} else {
 			$resultado['status'] = 2;
-			echo "ERRO 1 - SENHA ATUAL ERRADA";
-			echo "<p><a href='../conta-cliente.php'>	VOLTAR!	</a></p>";
 		}
 	} else {
 		$resultado['status'] = 3;
-		echo "ERRO 2 - CAMPOS VAZIOS";
-		echo "<p><a href='../conta-cliente.php'>	VOLTAR!	</a></p>";
 	}
 
 	//Mandar o $resultado para o JS
-	//header('Content-type: application/json');
+	header('Content-type: application/json');
 
-  	//echo json_encode($resultado);
+	echo json_encode($resultado);
 
 ?>

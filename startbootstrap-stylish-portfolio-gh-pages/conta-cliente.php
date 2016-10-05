@@ -134,7 +134,7 @@
             <div class="page-header">
                 <h2>Atualize seus dados </h2>
             </div>
-                <form method="POST" action="./php/atualizarConta.php">
+                <form method="POST" action="javascript:atualizarCliente();">
                     <div class="form-group col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2">
                        <div class="row">
                                 <div class="input-group">
