@@ -83,17 +83,13 @@ function cadastro() {
 	Lnome = 'Lnome=' + $('#Lnome').val();
 	Lemail = 'Lemail=' + $('#Lemail').val();
 	Lsenha = 'Lsenha=' + $('#Lsenha').val();
-	Mlogado = 'Mlogado=' + $('#Mlogado').val();
-
-	/*
-	var manter_logado = document.getElementsByName('#Mlogado');
-	if( manter_logado.checked ){
+	
+	if( $('#Mlogado').is(':checked') ){
 		Mlogado = 'Mlogado=' + $('#Mlogado').val();
 	}else{
 		Mlogado = 'Mlogado=' + $('#Mlogado').val('0');
 	}
-	
-	
+	/*	
 	 * Criação da variável data que vai conter toda a informação
 	 * a enviar para o servidor.
 	 */
@@ -225,3 +221,64 @@ function atualizarCliente() {
 				console.log("Detalhes: " + desc + "\nErro:" + err);
 		});
 }
+/**
+  * Função para criar um objeto XMLHTTPRequest
+  */
+ function CriaRequest() {
+     try{
+         request = new XMLHttpRequest();        
+     }catch (IEAtual){
+         
+         try{
+             request = new ActiveXObject("Msxml2.XMLHTTP");       
+         }catch(IEAntigo){
+         
+             try{
+                 request = new ActiveXObject("Microsoft.XMLHTTP");          
+             }catch(falha){
+                 request = false;
+             }
+         }
+     }
+     
+     if (!request) 
+         alert("Seu Navegador não suporta Ajax!");
+     else
+         return request;
+ }
+ 
+ /**
+  * Função para enviar os dados
+  */
+ function getDados() {
+     
+     // Declaração de Variáveis
+     var nome   = document.getElementById("txtnome").value; 
+     var result = document.getElementById("Resultado");
+     var xmlreq = CriaRequest();
+     
+	 //alert("Entrou!"+nome+""+opcaoNada+""+opcaoNome+""+opcaoCargo);
+	 
+     // Exibi a imagem de progresso
+     //result.innerHTML = '<img src="Progresso1.gif"/>';
+     
+     // Iniciar uma requisição
+	 
+     xmlreq.open("GET", "php/relatorio-func.php?txtnome=" + nome, true);
+	     
+     // Atribui uma função para ser executada sempre que houver uma mudança de ado
+     xmlreq.onreadystatechange = function(){
+         
+         // Verifica se foi concluído com sucesso e a conexão fechada (readyState=4)
+         if (xmlreq.readyState == 4) {
+             
+             // Verifica se o arquivo foi encontrado com sucesso
+             if (xmlreq.status == 200) {
+                 result.innerHTML = xmlreq.responseText;
+             }else{
+                 result.innerHTML = "Erro: " + xmlreq.statusText;
+             }
+         }
+     };
+     xmlreq.send(null);
+ }

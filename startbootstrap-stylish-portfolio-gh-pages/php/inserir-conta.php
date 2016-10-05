@@ -21,7 +21,7 @@
 	//print_r($Mlogado);
 //cadastrando
 	if($nome!="none" AND !empty($senha) AND !empty($email)){
-	$inserirUser= $conexao->prepare("INSERT INTO cliente (`id-cliente`, `nome`, `email`, `senha`)VALUES(NULL,:nome,:email,:senha)");
+	$inserirUser= $conexao->prepare("INSERT INTO cliente (`id_cliente`, `nome`, `email`, `senha`)VALUES(NULL,:nome,:email,:senha)");
 	$inserirUser->bindValue(":nome",$nome);
 	$inserirUser->bindValue(":email",$email);
 	$inserirUser->bindValue(":senha",$senha);
@@ -46,7 +46,7 @@
 		$linha = $validarLOGIN->fetch(PDO::FETCH_ASSOC);
 		$Vuser=$linha["email"];
 		$Vpass=$linha["senha"];
-		$Vid=$linha["id-cliente"];
+		$Vid=$linha["id_cliente"];
 		
 			if($Vuser == $Lemail AND $Vpass==$Lsenha){
 				if($Vid != 1){

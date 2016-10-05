@@ -142,7 +142,9 @@
 												<tr>
 														<th>Aparelho</th>
 														<th>Serviço</th>
-														<th>Descrição</th>
+														<th>status</th>
+														<th>atualizado em</th>
+														<th>descricao</th>
 												</tr>
 										</thead>
 										<tbody>

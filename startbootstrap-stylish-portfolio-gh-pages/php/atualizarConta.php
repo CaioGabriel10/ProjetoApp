@@ -15,7 +15,7 @@
 	$cliente->bindValue(":email",$email);
 	$cliente->execute();
 	$linha=$cliente->fetch(PDO::FETCH_ASSOC);
-	$id_cliente= $linha['id-cliente'];
+	$id_cliente= $linha['id_cliente'];
 
 	//RECEBENDO OS DADOS.
 	$nome = $_POST['nome'];
@@ -25,7 +25,7 @@
 	//VERIFICA E ATUALIZANDO OS DADOS.
 	//Verifico se os campos não estão vazios, para pegar a senha do cliente.
 	if ($nome!="none" AND !empty($senhaA) AND !empty($senha)) {
-		$verificaSenhaA = $conexao->prepare("SELECT `senha` FROM `cliente` WHERE `id-cliente` = :cliente");
+		$verificaSenhaA = $conexao->prepare("SELECT `senha` FROM `cliente` WHERE `id_cliente` = :cliente");
 		$verificaSenhaA->bindValue(":cliente",$id_cliente);
 		$verificaSenhaA->execute();
 		$arraySenha = $verificaSenhaA->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@
 
 		//Compara as senha que veio do banco de dados com a senha que o cliente digitou para então alterar os dados.
 		if ($senhaBanco == $senhaA) {
-			$atualizaCliente = $conexao->prepare("UPDATE `cliente` SET `nome` = :nome , `senha` = :senha WHERE `id-cliente` = :cliente");
+			$atualizaCliente = $conexao->prepare("UPDATE `cliente` SET `nome` = :nome , `senha` = :senha WHERE `id_cliente` = :cliente");
 			$atualizaCliente->bindValue(":nome",$nome);
 			$atualizaCliente->bindValue(":senha",$senha);
 			$atualizaCliente->bindValue(":cliente",$id_cliente);
