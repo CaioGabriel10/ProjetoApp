@@ -1,4 +1,22 @@
 <!DOCTYPE html>
+<?php
+ob_start();
+session_start();
+
+if(isset($_COOKIE['cookie_user']) AND isset($_COOKIE['cookie_pass'])){
+	header("Location: novo-pedido.php");
+
+}else if(isset($_SESSION['usuarioSession'])){
+
+	header("Location: novo-pedido.php");
+
+}else{	
+	unset($_SESSION["usuarioSession"]);
+	session_destroy();
+}
+//msg de teste 
+var_dump($_COOKIE);
+?>
 <html lang="pt-br">
 
 <head>
@@ -20,13 +38,8 @@
 		<!-- Custom Fonts -->
 		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
-		<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		<!--[if lt IE 9]>
-				<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-				<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
+		<script src="js/script.js"></script>
+		
 
 </head>
 
@@ -59,24 +72,29 @@
 	<div class="container">
 
 		<br> <br>
+			<div class="row">
+				<div class="col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2 ">
+					<form class="form-signin" method="POST" action="javascript:cadastro();">
 
-			<form class="form-signin col-xs-12 .col-sm-12 .col-md-9">
+						<h2 class="form-signin-heading">Cadastre-se para continuar:</h2>
+						<br>
+						<label for="nome" class="sr-only">Nome</label>
+						<input type="name"  id="nome" name="nome" class="form-control" placeholder="Nome" required="" autofocus="">
+						<br>
+						<label for="email" class="sr-only">Email</label>
+						<input type="email"  id="email" name="email"class="form-control" placeholder="Email" required="">
+						<br>
+						<label for="senha" class="sr-only">Senha</label>
+						<input type="password"  id="senha" name="senha"class="form-control" placeholder="Senha" required="">
+						<br>
+						<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
 
-				<h2 class="form-signin-heading">Cadastre-se para continuar:</h2>
-				<br>
-				<label for="nome" class="sr-only">Nome</label>
-				<input type="name" id="nome" class="form-control" placeholder="Nome" required="" autofocus="">
-				<br>
-				<label for="email" class="sr-only">Email</label>
-				<input type="email" id="email" class="form-control" placeholder="Email" required="">
-				<br>
-				<label for="senha" class="sr-only">Senha</label>
-				<input type="password" id="senha" class="form-control" placeholder="Senha" required="">
-				<br>
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
-
-			</form>
-
+					</form>
+					<div class='alert alert-info alert-dismissible ' role='alert'>
+						<div id="textDiv"></div>
+					</div>	
+				</div>
+			</div>
 		</div>
 
 		<br> <br> 
@@ -91,22 +109,32 @@
 						<h4 class="modal-title">Entre com sua conta:</h4>
 					</div>
 
-					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9">
+					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email" id="email" class="form-control" placeholder="Email" required="">
+						<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password" id="senha" class="form-control" placeholder="Senha" required="">
+						<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Senha" required="">
+						<br> 
+						<div class="checkbox">
+							<label>
+							<input type="checkbox" id="Mlogado" name="Mlogado" value="1"> manter-se logado
+							</label>
+						</div>
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
-
+						
 						<br>
-
+						<input type="hidden" id="Lnome" name="Lnome" value="none">
 					</form>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
+					</div>
+					<br>
+					<div class='alert alert-info alert-dismissible ' role='alert'>
+						<div id="textDivLogin"></div>
 					</div>
 				</div>
 
