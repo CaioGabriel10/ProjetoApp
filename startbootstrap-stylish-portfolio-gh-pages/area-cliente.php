@@ -23,7 +23,7 @@
 		<!-- Custom Fonts -->
 		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
-
+		<script src="js/script.js"></script>
 </head>
 
 <body>
@@ -133,13 +133,14 @@
 								
 					
 						<div class="page-header">
-								<h2>Seus pedidos</h2>
+								<h2>Seus pedidos <button class="btn btn-danger btn-xs pull-right"  data-title="Delete" data-toggle="modal" data-target="#delete">cancelar pedido</button></h2> 
 						</div>
 						<!--tabela de pedidos-->
-						<div class="table-responsive">
+						<div id="reload" class="table-responsive">
 								<table class="table table-striped">
 										<thead>
 												<tr>
+														<th>#</th>
 														<th>Aparelho</th>
 														<th>Serviço</th>
 														<th>status</th>
@@ -154,6 +155,32 @@
 										</tbody>
 								</table>
 						</div>
+
+					<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+						<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+							<h4 class="modal-title custom_align" id="Heading">Deletar pedido </h4>
+							</div>
+							<div class="modal-body">
+
+							<div class="alert alert-danger" id="textDiv"> Quer mesmo deletar esse pedido?</div>
+							
+								<div class="row">
+									<div class="col-xs-12   col-sm-12   col-md-12  col-lg-12">
+											<textarea class="form-control" id="motivo" name="motivo" rows="5" placeholder="descreva o motivo do cancelamento. "></textarea>
+									</div>
+									<input type="hidden" value="1" name="codcancela" id="codcancela">
+								</div>
+							</div>
+							<div class="modal-footer ">
+							<input type="submit" onclick="CancelarPedido()" class="btn btn-danger" id="acao" value="Sim">
+							<button type="button" class="btn btn-default" data-dismiss="modal" id="fechar">Cancelar</button>
+							</div>
+						</div>
+						</div>
+					</div>
 				</div>
 						<!--pontos-->
 						<div class="tab-pane fade " role="tabpane3" id="pontos" aria-labelledby="home-tab1">
@@ -278,6 +305,7 @@
 				}
 				// Enable map zooming with mouse scroll when the user clicks the map
 		$('.map').on('click', onMapClickHandler);
+
 		</script>
 
 </body>

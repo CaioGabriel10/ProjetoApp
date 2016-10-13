@@ -1,3 +1,112 @@
+function CancelarPedido() {
+	
+	/*
+	 * Obtenção dos dados do formulário e colocação dos mesmos
+	 * no formato nomeDaInfo=Info para enviar por POST.
+	 *
+	 * Utiliza-se a função val() para obter os valores
+	 * dos inputs com os id's em questão.
+	 */
+	var selected = new Array();
+	$("input:radio[id=cancelar]:checked").each(function() {
+       selected.push($(this).val());
+  });
+	/*if( $('#cancelar').is(':checked') ){
+		cancelar = 'cancelar=' + $('#cancelar').val();
+	}else{
+		cancelar = 'cancelar=' + $('#cancelar').val('0');
+	}*/	
+	cancelar = 'cancelar=' + selected;
+	motivo = 'motivo=' + $('#motivo').val();
+	cod = 'codcancela=' + $('#codcancela').val();
+
+	
+	
+	/*
+	 * Criação da variável data que vai conter toda a informação
+	 * a enviar para o servidor.
+	 */
+	data = motivo  + '&' + cod + '&' + cancelar;
+
+	//Começa aqui o pedido ajax
+	$.ajax({
+		//Tipo do pedido que, neste caso, é POST
+        type: 'POST', 
+        /*
+         * URL do ficheiro que para o qual iremos enviar os dados. 
+         * Pode ser um url absoluto ou relativo.
+         */
+        url: 'php/pedido.php', 
+        //Que dados vamos enviar? A variável "data"
+        data: data,
+        //O tipo da informação da resposta
+        dataType: 'json'
+    }).done(function(response) {
+
+    	/* 
+    	 * Quando a chamada Ajax é terminada com sucesso,
+    	 * o javascript confirma o status da operação
+    	 * com a variável que enviámos no formato json.
+    	 */
+        if(response.status == 1) {
+        	//Se for positivo, mostra ao utilizador uma janela de sucesso.
+			var div = document.getElementById("textDiv");
+			div.textContent = "pedido cancelado";
+			var text = div.textContent;
+
+			//mudar nome de campo
+			var div = document.getElementById("fechar");
+			div.textContent = "sair";
+			var text = div.textContent;
+			//esconder botao
+			document.getElementById('acao').type = 'hidden';
+
+			//voltar botoes
+			setTimeout(function(){				
+				var div = document.getElementById("fechar");
+				div.textContent = "cancelar";
+				var text = div.textContent;
+
+				var div = document.getElementById("textDiv");
+				div.textContent = "Quer mesmo deletar esse pedido?";
+				var text = div.textContent;
+				//esconder botao
+				document.getElementById('acao').type = 'button';
+			},10000)
+
+			//recarregar a div da tabela
+			$("#reload").load("area-cliente.php #reload");
+			//limpar campo
+			document.getElementById('motivo').value='';
+			document.getElementById('cancelar').checked = false;
+			setTimeout(function(){
+				var div = document.getElementById("textDiv");
+				div.textContent = "clique sair dessa ação para fechar essa tela";
+				var text = div.textContent;
+				
+			},5000)
+        } else {
+        	//Caso contrário dizemos que aconteceu algum erro.
+			var div = document.getElementById("textDiv");
+			div.textContent = "erro ao tentar cancelar o pedido";
+			var text = div.textContent;
+        }
+
+    }).fail(function(xhr, desc, err) {
+    	/*
+    	 * Caso haja algum erro na chamada Ajax,
+    	 * o utilizador é alertado e serão enviados detalhes
+    	 * para a consola javascript que pode ser visualizada 
+    	 * através das ferramentas de desenvolvedor do browser.
+    	 */
+		var div = document.getElementById("textDiv");
+		div.textContent = "Uups! Ocorreu algum erro! NO CÓDIGO!";
+		var text = div.textContent;
+		
+        console.log(xhr);
+        console.log("Detalhes: " + desc + "\nErro:" + err);
+    });
+}
 function enviarRegisto() {
 	
 	/*

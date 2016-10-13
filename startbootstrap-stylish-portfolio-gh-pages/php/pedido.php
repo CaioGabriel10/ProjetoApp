@@ -4,10 +4,16 @@
    
     include('conexao.php');
     $conexao = $pdo;
-
-    $aparelho = $_POST['aparelho'];
-    $servico = $_POST['servico'];    
-    $descricao = $_POST['descricao'];
+    
+    if(isset($_POST['aparelho']) AND isset($_POST['servico']) AND isset($_POST['descricao'])):
+        $aparelho = $_POST['aparelho'];
+        $servico = $_POST['servico'];    
+        $descricao = $_POST['descricao'];
+    else:
+        $aparelho = NULL;
+        $servico = NULL;    
+        $descricao = NULL;
+    endif;
     
     $resultado =  array();
     
@@ -34,6 +40,35 @@
         $resultado['status'] = false;
     }
     
+    //cancelando pedido
+  if(isset($_POST['codcancela']) AND isset($_POST['cancelar'] )AND isset($_POST['motivo'])):
+    $cod = $_POST['codcancela'];
+    $cancelar = $_POST['cancelar'];
+   // var_dump($_POST['selected']);
+    //$cancelar['array'] = $this->input->post('array');
+    $motivo = $_POST['motivo'];
+    //$length = count($_POST('selected'));
+
+    //print_r($cancelar);
+    else:
+    $cod = NULL;
+    $cancelar = NULL;
+    $motivo = NULL;
+endif;
+
+    if(!empty($cod)  AND !empty($motivo) AND empty($servico) AND empty($aparelho) AND empty($descricao)):
+    
+        $cancelarPedido = $conexao->prepare("UPDATE pedido SET `status`=:sta, `descricao`=:des, `ultima_att` = NULL WHERE `pedido`.`id_pedido`= :id");
+        $cancelarPedido->bindValue(":sta","cancelado");
+        $cancelarPedido->bindValue(":des",$motivo);
+        $cancelarPedido->bindValue(":id",$cancelar);
+         $cancelarPedido->execute();
+        
+        
+        $resultado['status'] = 1;
+   
+    endif;
+
     header('Content-type: application/json');
 
     echo json_encode($resultado);
