@@ -303,17 +303,27 @@ function atualizarCliente() {
 			 */
 				if(response.status == 1) {
 			var div = document.getElementById("textDiv");
-			div.textContent = "ATUALIZADO COM SUCESSO!";
+			div.textContent = "Dados atualizados com sucesso!";
 			var text = div.textContent;
 				} else if(response.status == 2){
 			var div = document.getElementById("textDiv");
-			div.textContent = "SUA SENHA ATUAL ESTA ERRADA, TENTE NOVAMENTE!";
+			div.textContent = "Senha atual errada, tente novamente!";
 			var text = div.textContent;
-				} else {
+				} else if(response.status == 3){
 			var div = document.getElementById("textDiv");
-			div.textContent = "TODOS OS CAMPOS SÃO OBRIGATORIOS!";
+			div.textContent = "Senha atual obrigatória!";
 			var text = div.textContent;
-		}
+				} else if(response.status == 4){
+			var div = document.getElementById("textDiv");
+			div.textContent = "Nome atualizado com sucesso!";
+			var text = div.textContent;
+				} else if(response.status == 5){
+			var div = document.getElementById("textDiv");
+			div.textContent = "Senha atualizada com sucesso!";
+			} else {
+			var div = document.getElementById("textDiv");
+			div.textContent = "Preencha os campos a serem atualizados!";
+			}
 
 		}).fail(function(xhr, desc, err) {
 			/*

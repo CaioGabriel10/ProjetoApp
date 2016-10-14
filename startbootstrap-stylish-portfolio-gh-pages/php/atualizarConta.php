@@ -24,7 +24,7 @@
 
 	//VERIFICA E ATUALIZANDO OS DADOS.
 	//Verifico se os campos não estão vazios, para pegar a senha do cliente.
-	if ($nome!="none" AND !empty($senhaA) AND !empty($senha)) {
+	if (!empty($senhaA)) {
 		$verificaSenhaA = $conexao->prepare("SELECT `senha` FROM `cliente` WHERE `id_cliente` = :cliente");
 		$verificaSenhaA->bindValue(":cliente",$id_cliente);
 		$verificaSenhaA->execute();
@@ -33,12 +33,28 @@
 
 		//Compara as senha que veio do banco de dados com a senha que o cliente digitou para então alterar os dados.
 		if ($senhaBanco == $senhaA) {
-			$atualizaCliente = $conexao->prepare("UPDATE `cliente` SET `nome` = :nome , `senha` = :senha WHERE `id_cliente` = :cliente");
-			$atualizaCliente->bindValue(":nome",$nome);
-			$atualizaCliente->bindValue(":senha",$senha);
-			$atualizaCliente->bindValue(":cliente",$id_cliente);
-			$atualizaCliente->execute();
-			$resultado['status'] = 1;
+			if (!empty($nome) && !empty($senha)) {
+				$atualizaCliente = $conexao->prepare("UPDATE `cliente` SET `nome` = :nome , `senha` = :senha WHERE `id_cliente` = :cliente");
+				$atualizaCliente->bindValue(":nome",$nome);
+				$atualizaCliente->bindValue(":senha",$senha);
+				$atualizaCliente->bindValue(":cliente",$id_cliente);
+				$atualizaCliente->execute();
+				$resultado['status'] = 1;
+			} elseif (!empty($nome) && empty($senha)) {
+				$atualizaCliente = $conexao->prepare("UPDATE `cliente` SET `nome` = :nome WHERE `id_cliente` = :cliente");
+				$atualizaCliente->bindValue(":nome",$nome);
+				$atualizaCliente->bindValue(":cliente",$id_cliente);
+				$atualizaCliente->execute();
+				$resultado['status'] = 4;
+			} elseif (!empty($senha) && empty($nome)) {
+				$atualizaCliente = $conexao->prepare("UPDATE `cliente` SET `senha` = :senha WHERE `id_cliente` = :cliente");
+				$atualizaCliente->bindValue(":senha",$senha);
+				$atualizaCliente->bindValue(":cliente",$id_cliente);
+				$atualizaCliente->execute();
+				$resultado['status'] = 5;
+			} else {
+				$resultado['status'] = 6;
+			}
 		} else {
 			$resultado['status'] = 2;
 		}
