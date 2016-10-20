@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 14-Out-2016 às 19:05
--- Versão do servidor: 10.1.16-MariaDB
--- PHP Version: 7.0.9
+-- Generation Time: 20-Out-2016 às 18:00
+-- Versão do servidor: 10.1.13-MariaDB
+-- PHP Version: 5.6.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `app_teste`
+-- Database: `teste_app1`
 --
 
 -- --------------------------------------------------------
@@ -53,18 +53,11 @@ CREATE TABLE `pedido` (
   `dispositivo` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `servico` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `descricao` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `valor` double NOT NULL,
   `status` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `ultima_att` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `cliente_id_cliente` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Extraindo dados da tabela `pedido`
---
-
-INSERT INTO `pedido` (`id_pedido`, `dispositivo`, `servico`, `descricao`, `status`, `ultima_att`, `cliente_id_cliente`) VALUES
-(49, 'smartphone', 'troca-de-peca', 'Tela quebrada.', 'enviado', '2016-10-14 17:04:26', 39),
-(48, 'computador', 'formatacao', 'Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Test', 'enviado', '2016-10-14 17:02:05', 38);
 
 --
 -- Indexes for dumped tables
@@ -91,12 +84,12 @@ ALTER TABLE `pedido`
 -- AUTO_INCREMENT for table `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `pedido`
 --
 ALTER TABLE `pedido`
-  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_pedido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

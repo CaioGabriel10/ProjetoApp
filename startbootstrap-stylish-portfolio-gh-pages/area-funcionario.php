@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php 
+	
 	include('php/restrito.php');
+	include('php/dboard_relatorio.php');
 ?>
 <html lang="pt-BR">
 
@@ -12,7 +14,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>CJR-área cliente</title>
+		<title>CJR-área funcionario</title>
 
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +67,11 @@
 													<i class="fa fa-comments fa-5x"></i>
 											 </p>
 											 <p class=" text-center" >
-												<span class="badge">5 clientes esperando respostas!</span>
+												<span class="badge">
+													<?php
+													//Exibe pedidos com status ENVIADO
+													echo $j;
+                                    				?> pedidos esperando respostas!</span>
 											 </p>
 										</div>
 								</div>
@@ -75,7 +81,11 @@
 												<i class="fa fa-archive fa-5x"></i>
 											 </p>
 											 <p class=" text-center">
-												 <span class="badge">pedios cancelados 10, 30% do total</span>
+												 <span class="badge">pedios cancelados
+												 <?php
+													//Exibe pedidos com status ENVIADO
+													echo $dboard_cancelados;
+                                    				?> do total</span>
 											 </p>
 										</div>
 								</div>
@@ -87,7 +97,11 @@
 														<i class="fa fa-users fa-5x"></i>
 											 </p>
 											 <p class=" text-center" >
-												 <span class="badge">A CJR tem 30 clientes!!</span>
+												 <span class="badge">A CJR tem 
+												 <?php
+													//Exibe pedidos com status ENVIADO
+													echo $l;
+                                    				?> clientes!!</span>
 											 </p>
 										</div>
 								</div>
@@ -140,58 +154,39 @@
 						<div class="page-header">
 								<h2>Pedidos</h2>
 						</div>
+						
 						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3">
+							<div class="col-xs-8 col-sm-8 col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3">
+								<div class='input-group'>
 								<input type="text" class="form-control" placeholder="buscar por pedidos" name="txtnome" id="txtnome">
+								<div class='input-group-addon bg-info'><input type="checkbox" value="1" name="check_cliente"  id="check_cliente"></div>
+								</div>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-1  col-lg-1">
-								<button type="submit" class="btn btn-info" name="btnPesquisar"  onclick="getDados()"><i class="fa fa-user" aria-hidden="true"></i></button>
+							<div class="col-xs-2 col-sm-2 col-md-2  col-lg-2">
+								<button type="submit" class="btn btn-info btn-md" name="btnPesquisar"  id="btnPesquisar" onclick="getDados()"><i class="fa fa-user" aria-hidden="true"></i></button>
 							</div>
 						</div>
+						<hr>
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12  col-lg-12">
 								<div class="table-responsive">
-									<div id="Resultado"></div>
+									<div id="Resultado">
+									</div>
 								</div>
 							</div>
 						</div>
 															
-						<!--tabela de pedidos
-						<div class="table-responsive">
-								<table class="table table-striped">
-										<thead>
-												<tr>
-													<th>#</th>
-													<th>Aparelho</th>
-													<th>status</th>
-													<th>atualizado em</th>
-													<th>ação</th>
-												</tr>
-										</thead>
-										<tbody>
-												<tr>
-													<td>1</td>
-													<td>computador</td>
-													<td>enviado</td>
-													<td>2016 10 3 12:03</td>
-													<td>
-														<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" ><i class="fa fa-ban" aria-hidden="true"></i></button>
-													</td>
-												</tr>
-										</tbody>
-								</table>
-						</div>
-						-->
+					
 						<div id="myModal" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-lg">
 
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">configuração pedido: <p id="tex" class="btn btn-xs btn-info" disabled>sasaasadqw</p></h4>
+										<h4 class="modal-title">configuração pedido: <p id="codigoPedido" name="codigoPedido" class="btn btn-xs btn-info" disabled></p></h4>
 										
 										<div class='alert alert-info alert-dismissible' role='alert'>
-											<div id="textDivLogin"></div>
+											<div id="textDivUP"></div>
 										</div>
 									</div>
 
@@ -221,62 +216,62 @@
 													</div> 
 													<!-- tela de pedidos-->
 													<div class="tab-pane fade" role="tabpane2" id="info" aria-labelledby="info-tab1"> 
-														<form  action="javascript:enviarRegisto();">
-															<div class="form-group ">
+														<form >
+															<div class='form-group '>
 																<br>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon" >Nome</div>
-																			<input class="form-control" id="nome" name="nome" disabled placeholder="nnn nnnn">
+																<div class='row'>
+																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
+																		<div class='input-group '>
+																			<div class='input-group-addon' >Nome</div>
+																			<input class='form-control' id="rnome" name="rnome"  placeholder='nome usuario' disabled>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
-																		<div class="input-group">
-																			<div class="input-group-addon">Email</div>
-																			<input class="form-control" id="email" name="email"  placeholder="nnn nnnn" disabled>
+																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>Email</div>
+																			<input class='form-control' id='remail' name='remail'  placeholder="email do usuario" disabled/>
 																		</div>
 																		<br>
 																	</div>
 																</div>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon" >Aparelho</div>
-																			<input class="form-control" id="aparelho" name="aparelho" placeholder="nnn nnnn" disabled>
+																<div class='row'>
+																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
+																		<div class='input-group '>
+																			<div class='input-group-addon' >Dispositivo</div>
+																			<input class='form-control' id='rdispositivo' name='rdispositivo' placeholder='dispositivo usuario' disabled>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
-																		<div class="input-group">
-																			<div class="input-group-addon">Servico</div>
-																			<input class="form-control" id="servico" name="servico" placeholder="nnn nnnn" disabled>
+																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>Servico</div>
+																			<input class='form-control' id='rservico' name='rservico' placeholder='servico usuario' disabled>
 																		</div>
 																		<br>
 																	</div>
 																</div>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon" >Status</div>
-																			<input class="form-control" id="status" name="status" placeholder="nnn nnnn" disabled>
+																<div class='row'>
+																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
+																		<div class='input-group '>
+																			<div class='input-group-addon' >Status</div>
+																			<input class='form-control' id='rstatus' name='rstatus' placeholder='status pedido' disabled>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
-																		<div class="input-group">
-																			<div class="input-group-addon">Valor</div>
-																			<input class="form-control" id="valor" name="valor" placeholder="nnn nnnn" disabled>
+																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>Valor</div>
+																			<input class='form-control' id='rvalor' name='rvalor' placeholder='valor do pedido' disabled>
 																		</div>
 																		<br>
 																	</div>
 																</div>
-																<div class="row">
-																	<div class="col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-																		<div class="input-group">
-																			<div class="input-group-addon">descrição</div>
-																			<textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="nnn n n n n n   nnn " disabled></textarea>
+																<div class='row'>
+																	<div class='col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2'>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>descrição</div>
+																			<textarea class='form-control' id='rdescricao' name='rdescricao' rows='5' placeholder='descricao pedido' disabled></textarea>
 																		</div>
 																	</div>
 																</div>
@@ -285,7 +280,7 @@
 													</div>
 													<!--atualizar status-->
 													<div class="tab-pane fade " role="tabpane3" id="tstatus" aria-labelledby="tstatus-tab1">
-														<form  action="javascript:enviarRegisto();">
+														<form action='javascript:FuncAttPedido();'>
 															<div class="form-group ">
 																<br>
 																<div class="row">
@@ -308,18 +303,14 @@
 																<div class="row">
 																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
 																		<div class="input-group ">
-																			<div class="input-group-addon" >status</div>
-																			<input class="form-control" id="status" name="status" placeholder="nnn nnnn">
+																			<div class="input-group-addon" >senha admin</div>
+																			<input class="form-control" id="sadmin" name="sadmin" type="password"placeholder="senha admin">
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																</div>
-																<br>
-																<div class="row">
 																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
 																		<div class="input-group ">
-																			<div class="input-group-addon">status</div>
-																			<button class="btn btn-lg btn-primary btn-block" type="submit">enviar</button>
+																			<button class="btn btn-md btn-primary btn-block" type="submit">enviar</button>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
@@ -333,7 +324,7 @@
 									</div>
 
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">fechar</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal" onclick="document.getElementById('btnPesquisar').click()">fechar</button>
 									</div>
 								</div>
 
