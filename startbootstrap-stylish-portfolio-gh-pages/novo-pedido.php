@@ -89,7 +89,10 @@
                 <div class="col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                     <div class="input-group">
                         <div class="input-group-addon">descrição</div>
-                        <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="descreva o problema em seu aparelho"></textarea>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="descreva o problema em seu aparelho" maxlength="100" onKeyDown="textCounter(this.form.descricao,this.form.remLen,100);" onKeyUp="textCounter(this.form.descricao,this.form.remLen,100);"></textarea>
+						
+						<br>
+						<input readonly type="text" name="remLen" class="form-control" maxlength=3 value="100">
                     </div>
                 </div>
             </div>
@@ -112,6 +115,9 @@
     </form>
 </div>
 
+    
+
+
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
 
@@ -120,6 +126,12 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
+        function textCounter(field, countfield, maxlimit) {
+if (field.value.length > maxlimit)
+field.value = field.value.substring(0, maxlimit);
+else 
+countfield.value = maxlimit - field.value.length;
+}
     // Closes the sidebar menu
     $("#menu-close").click(function(e) {
         e.preventDefault();

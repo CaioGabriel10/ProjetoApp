@@ -79,13 +79,13 @@ var_dump($_COOKIE);
 						<h2 class="form-signin-heading">Cadastre-se para continuar:</h2>
 						<br>
 						<label for="nome" class="sr-only">Nome</label>
-						<input type="name"  id="nome" name="nome" class="form-control" placeholder="Nome" required="" autofocus="">
+						<input type="name"  id="nome" name="nome" class="form-control" placeholder="Nome" required="" autofocus="" maxlength="45">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email"  id="email" name="email"class="form-control" placeholder="Email" required="">
+						<input type="email"  id="email" name="email"class="form-control" placeholder="Email" required="" maxlength="45">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password"  id="senha" name="senha"class="form-control" placeholder="Senha" required="">
+						<input type="password"  id="senha" name="senha"class="form-control" placeholder="Senha" required="" maxlength="16">
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
 
@@ -112,10 +112,10 @@ var_dump($_COOKIE);
 					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
 						<br>
 						<label for="email" class="sr-only">Email</label>
-						<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="">
+						<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="" maxlength="45">
 						<br>
 						<label for="senha" class="sr-only">Senha</label>
-						<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Senha" required="">
+						<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Senha" required="" maxlength="16">
 						<br> 
 						<div class="checkbox">
 							<label>

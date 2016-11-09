@@ -161,7 +161,7 @@
                        <div class="row">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senhaA" id="senhaA" type="password" placeholder="Sua Senha Atual" maxlength="50">
+                                <input class="form-control" name="senhaA" id="senhaA" type="password" placeholder="Sua Senha Atual" maxlength="16">
                                 </div>
                                 <br> 
                         </div>
@@ -169,7 +169,7 @@
                          <div class="row">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-user fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="nome" id="nome" type="text" placeholder="Seu Nome" maxlength="50">
+                                <input class="form-control" name="nome" id="nome" type="text" placeholder="Seu Nome" maxlength="45">
                                 </div>
                                 <br>    
                         </div>
@@ -177,7 +177,7 @@
                         <div class="row">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senha" id="senha" type="password" placeholder="Nova Senha" maxlength="50">
+                                <input class="form-control" name="senha" id="senha" type="password" placeholder="Nova Senha" maxlength="16">
                                 </div>
                                 <br>
                         </div>
