@@ -15,7 +15,7 @@ if(isset($_COOKIE['cookie_user']) AND isset($_COOKIE['cookie_pass'])){
 	session_destroy();
 }
 //msg de teste 
-var_dump($_COOKIE);
+//var_dump($_COOKIE);
 ?>
 <html lang="pt-br">
 
@@ -88,7 +88,7 @@ var_dump($_COOKIE);
 						<input type="password"  id="senha" name="senha"class="form-control" placeholder="Senha" required="" maxlength="16">
 						<br>
 						<button class="btn btn-lg btn-primary btn-block" type="submit">Cadastrar</button>
-
+						<br>
 					</form>
 					<div class='alert alert-info alert-dismissible ' role='alert'>
 						<div id="textDiv"></div>
@@ -106,7 +106,7 @@ var_dump($_COOKIE);
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Entre com sua conta:</h4>
+						<h4 class="modal-title">Entre em sua conta:</h4>
 					</div>
 
 					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
@@ -119,7 +119,7 @@ var_dump($_COOKIE);
 						<br> 
 						<div class="checkbox">
 							<label>
-							<input type="checkbox" id="Mlogado" name="Mlogado" value="1"> manter-se logado
+							<input type="checkbox" id="Mlogado" name="Mlogado" value="1"> Continuar conectado
 							</label>
 						</div>
 						<br>
@@ -127,14 +127,14 @@ var_dump($_COOKIE);
 						
 						<br>
 						<input type="hidden" id="Lnome" name="Lnome" value="none">
+
+						<div class='alert alert-info alert-dismissible ' role='alert'>
+							<div id="textDivLogin"></div>
+						</div>
 					</form>
 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Voltar</button>
-					</div>
-					<br>
-					<div class='alert alert-info alert-dismissible ' role='alert'>
-						<div id="textDivLogin"></div>
 					</div>
 				</div>
 

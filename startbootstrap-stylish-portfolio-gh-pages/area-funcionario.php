@@ -14,7 +14,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>CJR-área funcionario</title>
+		<title>CJR - Área do funcionário</title>
 
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -26,6 +26,21 @@
 		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 		<script src="js/script.js"></script>
+
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript" src="./js/jquery.js"></script>
+
+	    <script type="text/javascript">
+	      google.load('visualization', '1.0', {'packages':['corechart']});
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json", async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.PieChart(document.getElementById('area_grafico'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
 </head>
 
 <body>
@@ -35,14 +50,11 @@
 		<nav id="sidebar-wrapper">
 				<ul class="sidebar-nav">
 						<a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-						<li class="sidebar-brand" role="presentation">
-								<a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">home</a>
-						</li>
-						<li role="presentation" ><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pedidos</a></li>
-						<li role="presentation" ><a href="#pontos" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pontos</a></li>
-						<li><a href="novo-pedido.php">novo pedido</a></li>
-						<li><a href="conta-cliente.php"> minha conta</a></li>
-						<li><a href="php/restrito.php?out=true">sair</a></li>
+            <li class="sidebar-brand" role="presentation"><a href="./index.html">Home</a></li>
+            <li><a href="./area-cliente.php">Área do cliente</a></li>
+            <li><a href="./novo-pedido.php">Novo pedido</a></li>
+            <li><a href="./conta-cliente.php">Minha conta</a></li>
+            <li><a href="./php/restrito.php?out=true">Sair</a></li>
 				</ul>
 		</nav>
 <div class="container">
@@ -56,10 +68,18 @@
 						<!--localizacao na area do cliente-->
 						<ol class="breadcrumb">
 						<li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-						 <li><a href="#">area-funcionário</a></li>
-						<li><a href="#">home</a></li>
+						 <li><a href="./area-funcionario.php">Área do funcionário</a></li>
+						<li><a href="#home1">Home</a></li>
 						</ol>
 						<!--icons com numero de ponto, etc-->
+						<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<div class="jumbotron">
+											<h4 style="text-align: center;">Relação dos status dos pedidos:</h4>
+											<div id="area_grafico"></div>
+										</div>
+								</div>
+						</div>
 						<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 										<div class="jumbotron">
@@ -146,24 +166,24 @@
 				<div class="tab-pane fade" role="tabpanel" id="profile1" aria-labelledby="profile-tab1"> 
 						<ol class="breadcrumb">
 						<li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-						 <li><a href="#">area-funcionário</a></li>
-						<li><a href="#">pedidos</a></li>
+						 <li><a href="./area-funcionario.php">Área do funcionário</a></li>
+						<li><a href="#profile1">Pedidos</a></li>
 						</ol>
 								
 					
 						<div class="page-header">
-								<h2>Pedidos</h2>
+								<h2>Pesquisa de pedidos e clientes</h2>
 						</div>
 						
 						<div class="row">
-							<div class="col-xs-8 col-sm-8 col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3">
+							<div class="col-xs-8 col-sm-8 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
 								<div class='input-group'>
-								<input type="text" class="form-control" placeholder="buscar por pedidos" name="txtnome" id="txtnome">
+								<input type="text" class="form-control" placeholder="Pesquise por pedidos ou marque ao lado para clientes" name="txtnome" id="txtnome">
 								<div class='input-group-addon bg-info'><input type="checkbox" value="1" name="check_cliente"  id="check_cliente"></div>
 								</div>
 							</div>
 							<div class="col-xs-2 col-sm-2 col-md-2  col-lg-2">
-								<button type="submit" class="btn btn-info btn-md" name="btnPesquisar"  id="btnPesquisar" onclick="getDados()"><i class="fa fa-user" aria-hidden="true"></i></button>
+								<button type="submit" class="btn btn-info btn-md" name="btnPesquisar"  id="btnPesquisar" onclick="getDados()"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</div>
 						</div>
 						<hr>
@@ -183,11 +203,12 @@
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">configuração pedido: <p id="codigoPedido" name="codigoPedido" class="btn btn-xs btn-info" disabled></p></h4>
-										
+										<h4 class="modal-title">Detalhes do pedido: <p id="codigoPedido" name="codigoPedido" class="btn btn-xs btn-info" disabled></p></h4>
+										<br>
 										<div class='alert alert-info alert-dismissible' role='alert'>
 											<div id="textDivUP"></div>
 										</div>
+
 									</div>
 
 									<div class="row">
@@ -202,16 +223,16 @@
 													<div class="tab-pane fade active in" role="tabpanel" id="email" aria-labelledby="email-tab1">
 														<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
 															<br>
-															<label for="email" class="sr-only">Email</label>
+															<label for="email" class="sr-only">E-mail</label>
 															<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="">
 															<br>
 															<label for="senha" class="sr-only">Assunto</label>
 															<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Assunto" required="">
 															<br> 
 															<label for="conteudo" class="sr-only">Assunto</label>
-															 <textarea class="form-control" id="conteudo" name="conteudo" rows="7" placeholder="mensagem cliente" required=""></textarea>															
+															 <textarea class="form-control" id="conteudo" name="conteudo" rows="7" placeholder="Mensagem" required=""></textarea>															
 															<br>
-															<button class="btn btn-lg btn-primary btn-block" type="submit">enviar</button>
+															<button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
 														</form>
 													</div> 
 													<!-- tela de pedidos-->
@@ -303,14 +324,7 @@
 																<div class="row">
 																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
 																		<div class="input-group ">
-																			<div class="input-group-addon" >senha admin</div>
-																			<input class="form-control" id="sadmin" name="sadmin" type="password"placeholder="senha admin">
-																		</div>
-																		<br><!--necessário por problema de responsabilidade-->
-																	</div>
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<button class="btn btn-md btn-primary btn-block" type="submit">enviar</button>
+																			<button class="btn btn-md btn-primary btn-block" type="submit">Enviar</button>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>

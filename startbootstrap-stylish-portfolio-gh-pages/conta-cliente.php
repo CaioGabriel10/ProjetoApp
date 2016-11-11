@@ -35,12 +35,11 @@
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand" role="presentation">
-                <a href="area-cliente.php">Home</a>
-            </li>
-            <li><a href="novo-pedido.php">Novo pedido</a></li>
-            <li><a href="conta-cliente.php">Minha conta</a></li>
-            <li><a href="php/restrito.php?out=true">Sair</a></li>
+            <li class="sidebar-brand" role="presentation"><a href="./index.html">Home</a></li>
+            <li><a href="./area-cliente.php">Área do cliente</a></li>
+            <li><a href="./novo-pedido.php">Novo pedido</a></li>
+            <li><a href="./conta-cliente.php">Minha conta</a></li>
+            <li><a href="./php/restrito.php?out=true">Sair</a></li>
         </ul>
     </nav>
 <div class="container">

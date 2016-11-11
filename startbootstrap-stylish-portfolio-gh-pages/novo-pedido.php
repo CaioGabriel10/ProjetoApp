@@ -2,9 +2,9 @@
 <?php 
     include('php/restrito.php');
                 //msg de teste 
-                echo $_COOKIE["cookie_pass"];
-                $la=$_COOKIE["cookie_user"];
-                echo $la;
+                //echo $_COOKIE["cookie_pass"];
+                //$la=$_COOKIE["cookie_user"];
+                //echo $la;
 ?>
 <html lang="pt-BR">
 
@@ -16,7 +16,7 @@
 		<meta name="description" content="Manutencao de computadores, smartphones, notebooks e tablets.">
 		<meta name="author" content="CJR">
 
-		<title>CJR-area cliente</title>
+		<title>CJR - Área do cliente</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -37,22 +37,21 @@
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand" role="presentation">
-                <a href="area-cliente.php">home</a>
-            </li>
-            <li><a href="novo-pedido.php">novo pedido</a></li>
-            <li><a href="conta-cliente.php"> minha conta</a></li>
-            <li><a href="php/restrito.php?out=true">sair</a></li>
+            <li class="sidebar-brand" role="presentation"><a href="./index.html">Home</a></li>
+            <li><a href="./area-cliente.php">Área do cliente</a></li>
+            <li><a href="./novo-pedido.php">Novo pedido</a></li>
+            <li><a href="./conta-cliente.php">Minha conta</a></li>
+            <li><a href="./php/restrito.php?out=true">Sair</a></li>
         </ul>
     </nav>
 <div class="container"> 
     <ol class="breadcrumb">
     <li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-    <li><a href="area-cliente.php">area-cliente</a></li>
-    <li><a href="#">novos-pedidos</a></li>
+    <li><a href="./area-cliente.php">Área do cliente</a></li>
+    <li><a href="./novo-pedido.php">Novos pedidos</a></li>
     </ol>
     <div class="page-header">
-        <h1>Faça novos pedidos<small> :)</small></h1>
+        <h1>Entre em contato:</h1>
     </div>
     <!--novo pedido-->
     <form  action="javascript:enviarRegisto();">
@@ -60,7 +59,7 @@
             <div class="row">
                 <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
                     <div class="input-group ">
-                        <div class="input-group-addon" >aparelho</div>
+                        <div class="input-group-addon" >Aparelho</div>
                         <select class="form-control" id="aparelho" name="aparelho">
                         <option>selecione</option>
                         <option value="computador">computador</option>
@@ -78,8 +77,8 @@
                         <option>selecione</option>
                         <option value="formatacao">formatação</option>
                         <option value="limpeza">limpeza</option>
-                        <option value="assitencia-tecnica">assistencia tecnica</option>
-                        <option value="troca-de-peca">troca de peça</option>
+                        <option value="assistencia tecnica">assistência técnica</option>
+                        <option value="troca de peca">troca de peça</option>
                         </select>
                     </div>
                     <br>
@@ -88,8 +87,8 @@
             <div class="row">
                 <div class="col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                     <div class="input-group">
-                        <div class="input-group-addon">descrição</div>
-                        <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="descreva o problema em seu aparelho" maxlength="100" onKeyDown="textCounter(this.form.descricao,this.form.remLen,100);" onKeyUp="textCounter(this.form.descricao,this.form.remLen,100);"></textarea>
+                        <div class="input-group-addon">Descrição</div>
+                        <textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="Está com algum problema?" maxlength="100" onKeyDown="textCounter(this.form.descricao,this.form.remLen,100);" onKeyUp="textCounter(this.form.descricao,this.form.remLen,100);"></textarea>
 						
 						<br>
 						<input readonly type="text" name="remLen" class="form-control" maxlength=3 value="100">
@@ -100,10 +99,11 @@
             <div class="row">
                 <div class="col-xs-12  col-sm-12  col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                     <div class="input-group">
-                    <button class="btn btn-default" type="submit">enviar</button>
+                    <button class="btn btn-default" type="submit">Enviar</button>
                     </div>
                 </div>
             </div>
+            <br>
             <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
                 <div class='alert alert-info alert-dismissible ' role='alert'>

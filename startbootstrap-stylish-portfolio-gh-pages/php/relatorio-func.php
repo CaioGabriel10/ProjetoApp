@@ -77,7 +77,7 @@ if (isset($_GET["txtnome"]) ) {
                             <th>servico</th>
                             <th>status</th>
                             <th>atualizado</th>
-                            <th>ação</th>
+                            <th>Editar</th>
                         </tr>
                     </thead>
                     <tbody>
