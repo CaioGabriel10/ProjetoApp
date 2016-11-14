@@ -41,6 +41,47 @@
 	        chart.draw(dados, json.config);
 	      });
 	    </script>
+	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico2.php", dataType:"json", async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.ColumnChart(document.getElementById('area_grafico2'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico3.php", dataType:"json", async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.LineChart(document.getElementById('area_grafico3'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico4.php", dataType:"json", async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.PieChart(document.getElementById('area_grafico4'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico5.php", dataType:"json", async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.PieChart(document.getElementById('area_grafico5'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+
 </head>
 
 <body>
@@ -71,12 +112,44 @@
 						 <li><a href="./area-funcionario.php">Área do funcionário</a></li>
 						<li><a href="#home1">Home</a></li>
 						</ol>
-						<!--icons com numero de ponto, etc-->
+						<!--Gráficos de Pizza - 1 grafico de status-->
+						<div class="row">
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Relação dos status dos pedidos:</strong></h4>
+											<div id="area_grafico"></div>
+										</div>
+								</div>
+						<!--Gráficos de Pizza - 4 grafico de dispositivos-->
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Relação dos dispositivos dos pedidos:</strong></h4>
+											<div id="area_grafico4"></div>
+										</div>
+								</div>
+						<!--Gráficos de Pizza - 5 grafico de servicos-->
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Relação dos serviços dos pedidos:</strong></h4>
+											<div id="area_grafico5"></div>
+										</div>
+								</div>
+						</div>
+						<!--Segundo gráfico - Cliente por mês -->
 						<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 										<div class="jumbotron">
-											<h4 style="text-align: center;">Relação dos status dos pedidos:</h4>
-											<div id="area_grafico"></div>
+											<h4 style="text-align: center;"><strong>Clientes cadastrados por mês:</strong></h4>
+											<div id="area_grafico2"></div>
+										</div>
+								</div>
+						</div>
+						<!--Terceiro gráfico - Pedidos por trimestre -->
+						<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Pedidos realizados por trimestre em 2016:</strong></h4>
+											<div id="area_grafico3"></div>
 										</div>
 								</div>
 						</div>

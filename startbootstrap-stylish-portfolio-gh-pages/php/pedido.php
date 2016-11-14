@@ -28,7 +28,7 @@
 
 	//CADASTRANDO
     if(!empty($servico) AND !empty($aparelho) AND !empty($descricao)){
-        $inserirPedido = $conexao->prepare("INSERT INTO pedido (`id_pedido`,`dispositivo`,`servico`,`descricao`,`status`,`ultima_att`,`cliente_id_cliente`)VALUE(NULL,:disp,:serv,:des,:status,NULL,:fk_cliente)");
+        $inserirPedido = $conexao->prepare("INSERT INTO pedido (`id_pedido`,`dispositivo`,`servico`,`descricao`,`status`,`ultima_att`,`cliente_id_cliente`,`criacao_ped`)VALUE(NULL,:disp,:serv,:des,:status,NULL,:fk_cliente,NOW())");
         $inserirPedido->bindValue(":disp",$aparelho);
         $inserirPedido->bindValue(":serv",$servico);
         $inserirPedido->bindValue(":des",$descricao);

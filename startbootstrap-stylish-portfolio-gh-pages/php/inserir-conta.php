@@ -21,7 +21,7 @@
 	//print_r($Mlogado);
 //cadastrando
 	if($nome!="none" AND !empty($senha) AND !empty($email)){
-	$inserirUser= $conexao->prepare("INSERT INTO cliente (`id_cliente`, `nome`, `email`, `senha`)VALUES(NULL,:nome,:email,:senha)");
+	$inserirUser= $conexao->prepare("INSERT INTO cliente (`id_cliente`, `nome`, `email`, `senha`,`criacao_cli`)VALUES(NULL,:nome,:email,:senha,NOW())");
 	$inserirUser->bindValue(":nome",$nome);
 	$inserirUser->bindValue(":email",$email);
 	$inserirUser->bindValue(":senha",$senha);

@@ -23,12 +23,12 @@
     );
 
     // Consultar dados no BD
-    $consultaG = $conexao->prepare("SELECT `status`, COUNT(*) as quantidade FROM `pedido` GROUP BY `status`");
+    $consultaG = $conexao->prepare("SELECT `servico`, COUNT(*) as quantidade FROM `pedido` GROUP BY `servico`");
     $consultaG->execute();
     $stmt = $consultaG;
     while ($obj = $stmt->fetchObject()) {
         $grafico['dados']['rows'][] = array('c' => array(
-            array('v' => $obj->status),
+            array('v' => $obj->servico),
             array('v' => (int)$obj->quantidade)
         ));
     }
