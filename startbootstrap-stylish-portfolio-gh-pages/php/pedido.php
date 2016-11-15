@@ -3,7 +3,7 @@
 	session_start();
    
     include('conexao.php');
-    $conexao = $pdo;
+    $conexao = Conexao();
     
     if(isset($_POST['aparelho']) AND isset($_POST['servico']) AND isset($_POST['descricao'])):
         $aparelho = $_POST['aparelho'];
@@ -18,7 +18,7 @@
     $resultado =  array();
     
 //PEGANDO ID DO USUARIO PARA PREENCHER A FOREIGN KEY
-    $email = $_SESSION['usuarioSession'];
+    $_SESSION['usuarioSession'] = $_COOKIE['cookie_user'];
     $email = $_SESSION['usuarioSession'];
 	$cliente = $conexao->prepare("SELECT * FROM cliente WHERE  email=:email");
 	$cliente->bindValue(":email",$email);
@@ -41,7 +41,7 @@
     }
     
     //cancelando pedido
-  if(isset($_POST['codcancela']) AND isset($_POST['cancelar'] )AND isset($_POST['motivo'])):
+  if(isset($_POST['codcancela']) AND $_POST['cancelar']!= 0 AND isset($_POST['motivo'])):
     $cod = $_POST['codcancela'];
     $cancelar = $_POST['cancelar'];
    // var_dump($_POST['selected']);

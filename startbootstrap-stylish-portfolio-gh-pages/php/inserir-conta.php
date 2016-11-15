@@ -3,7 +3,7 @@
 	session_start();
 
 	include('conexao.php');
-	$conexao= $pdo;
+	$conexao = Conexao();
 	
 	$resultado =  array();
 
@@ -49,28 +49,26 @@
 		$Vid=$linha["id_cliente"];
 		
 			if($Vuser == $Lemail AND $Vpass==$Lsenha){
-				if($Vid != 1){
-					header("Location: ../novo-pedido.php");
+				if($Vid == 1){
+					header("Location: ../area-funcionario.php");
+					
+				}else{
+					header("Location: ../area-cliente.php");
 					$_SESSION['usuarioSession'] = $Vuser;
 					//session_cache_expire(1);
 					//fazendo biscoito para 7 dias
 					//$resultado['status'] = 3;
 					if($Mlogado == '1'){
-						
 						setcookie("cookie_user",$Lemail,time()+86400,"/ProjetoApp","localhost","0","0");
 						setcookie("cookie_pass",$Lsenha,time()+86400,"/ProjetoApp","localhost","0","0");
-					}					
-				}else{
-					//header("Location: ../relatorio-usuario.php");
-					//$_SESSION['idSession'] = $Vid;
-					//echo "caso tenha tela de admin;)";
-					//$resultado['status'] = 3;
+					}
 				}
 			}else {
 				$resultado['status'] = 2;
 				//apagar usuário sessao
 				unset($_SESSION['usuarioSession']);
 			}
+
 	}else {
 		$resultado['status'] = 4;	
 		//apagar usuário sessao

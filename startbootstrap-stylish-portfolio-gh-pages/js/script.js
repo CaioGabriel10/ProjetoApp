@@ -246,7 +246,7 @@ function CancelarPedido() {
 				var text = div.textContent;
 				//esconder botao
 				document.getElementById('acao').type = 'button';
-			},10000)
+			},9000)
 
 			//recarregar a div da tabela
 			$("#reload").load("area-cliente.php #reload");
@@ -321,11 +321,16 @@ function enviarRegisto() {
     	 * o javascript confirma o status da operação
     	 * com a variável que enviámos no formato json.
     	 */
+		
+
         if(response.status == true) {
         	//Se for positivo, mostra ao utilizador uma janela de sucesso.
 			var div = document.getElementById("textDiv");
 			div.textContent = "pedido enviado para nossa equipe.";
 			var text = div.textContent;
+			
+			$("#reload").load("novo-pedido.php #reload");
+
         } else {
         	//Caso contrário dizemos que aconteceu algum erro.
 			var div = document.getElementById("textDiv");
@@ -498,6 +503,10 @@ function atualizarCliente() {
 			var div = document.getElementById("textDiv");
 			div.textContent = "Preencha os campos a serem atualizados!";
 			}
+
+			document.getElementById('senhaA').value='';
+			document.getElementById('nome').value='';
+			document.getElementById('senha').value='';
 
 		}).fail(function(xhr, desc, err) {
 			/*

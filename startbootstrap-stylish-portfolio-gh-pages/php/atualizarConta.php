@@ -4,7 +4,7 @@
 	session_start();
 
 	include('conexao.php');
-	$conexao = $pdo;
+	$conexao = Conexao();
 
 	//RESULTADO QUE SERÁ EXIBIDO NA DIV DE ID=textDiv.
 	$resultado =  array();

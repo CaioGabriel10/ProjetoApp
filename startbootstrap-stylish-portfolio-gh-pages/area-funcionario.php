@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <?php 
-	
 	include('php/restrito.php');
 	include('php/dboard_relatorio.php');
 ?>
@@ -33,7 +32,7 @@
 	    <script type="text/javascript">
 	      google.load('visualization', '1.0', {'packages':['corechart']});
 	      google.setOnLoadCallback(function(){
-	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json", async: false}).responseText;
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoUm',type:'POST', async: false}).responseText;
 	        var json = eval("(" + json_text + ")");
 	        var dados = new google.visualization.DataTable(json.dados);
 
@@ -43,7 +42,7 @@
 	    </script>
 	    <script type="text/javascript">
 	      google.setOnLoadCallback(function(){
-	        var json_text = $.ajax({url: "./php/getDadosGrafico2.php", dataType:"json", async: false}).responseText;
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoDois',type:'POST', async: false}).responseText;
 	        var json = eval("(" + json_text + ")");
 	        var dados = new google.visualization.DataTable(json.dados);
 
@@ -53,7 +52,7 @@
 	    </script>
 	    <script type="text/javascript">
 	      google.setOnLoadCallback(function(){
-	        var json_text = $.ajax({url: "./php/getDadosGrafico3.php", dataType:"json", async: false}).responseText;
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoTres',type:'POST', async: false}).responseText;
 	        var json = eval("(" + json_text + ")");
 	        var dados = new google.visualization.DataTable(json.dados);
 
@@ -63,7 +62,7 @@
 	    </script>
 	    <script type="text/javascript">
 	      google.setOnLoadCallback(function(){
-	        var json_text = $.ajax({url: "./php/getDadosGrafico4.php", dataType:"json", async: false}).responseText;
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoQuatro',type:'POST', async: false}).responseText;
 	        var json = eval("(" + json_text + ")");
 	        var dados = new google.visualization.DataTable(json.dados);
 
@@ -73,7 +72,7 @@
 	    </script>
 	    	    <script type="text/javascript">
 	      google.setOnLoadCallback(function(){
-	        var json_text = $.ajax({url: "./php/getDadosGrafico5.php", dataType:"json", async: false}).responseText;
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoCinco',type:'POST', async: false}).responseText;
 	        var json = eval("(" + json_text + ")");
 	        var dados = new google.visualization.DataTable(json.dados);
 

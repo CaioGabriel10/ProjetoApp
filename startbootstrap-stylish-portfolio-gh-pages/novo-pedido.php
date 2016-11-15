@@ -55,13 +55,13 @@
     </div>
     <!--novo pedido-->
     <form  action="javascript:enviarRegisto();">
-        <div class="form-group ">
+        <div id="reload" class="form-group ">
             <div class="row">
                 <div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
                     <div class="input-group ">
                         <div class="input-group-addon" >Aparelho</div>
                         <select class="form-control" id="aparelho" name="aparelho">
-                        <option>selecione</option>
+                        <option value="0">selecione</option>
                         <option value="computador">computador</option>
                         <option value="notebook">notebook</option>
                         <option value="smartphone">smartphone</option>
@@ -74,7 +74,7 @@
                     <div class="input-group">
                         <div class="input-group-addon">Serviço</div>
                         <select class="form-control" id="servico" name="servico">
-                        <option>selecione</option>
+                        <option value="0">selecione</option>
                         <option value="formatacao">formatação</option>
                         <option value="limpeza">limpeza</option>
                         <option value="assistencia tecnica">assistência técnica</option>
@@ -103,14 +103,13 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-                <div class='alert alert-info alert-dismissible ' role='alert'>
-                    <div id="textDiv"></div>
-                </div>
+        </div>
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+            <div class='alert alert-info alert-dismissible ' role='alert'>
+                <div id="textDiv"></div>
             </div>
-            </div>
+        </div>
         </div>
     </form>
 </div>
@@ -126,6 +125,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
+    //contador do campo descricao
         function textCounter(field, countfield, maxlimit) {
 if (field.value.length > maxlimit)
 field.value = field.value.substring(0, maxlimit);

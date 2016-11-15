@@ -1,8 +1,11 @@
 <?php
-    try{
+    function Conexao(){
+        try{
         $pdo = new PDO('mysql:host=localhost;dbname=app_teste','root','');
-    }catch(PDOException $e){
-        echo $e->getMessage();
+        return $pdo;
+        }catch(PDOException $e){
+            echo $e->getMessage();
+        }
     }
 ?>
 

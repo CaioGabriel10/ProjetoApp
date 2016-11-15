@@ -1,8 +1,8 @@
 <?php
 include('conexao.php');
- $conexao=$pdo;
+$conexao = Conexao();
 
-//BUSCANDO VALORES DO PEDIDO
+//BUSCANDO VALORES DO PEDIDO para o popup de informações
 if(isset($_POST['valorp'])):
     $valorp = $_POST['valorp'];
     $resultado = array();
@@ -31,14 +31,15 @@ if(isset($_POST['valorp'])):
     $resultado['dado']=1;
 endif;
 
-//TABELA COM OS DADOS
+//TABELA de relatório dos pedidos e clientes 
 if (isset($_GET["txtnome"]) ) {
     
     $name = $_GET["txtnome"];
 
+    // busca por clientes 
     if(isset($_GET['check_cliente'])):
         $check = $_GET['check_cliente'];
-		$relatorio=$conexao->prepare("SELECT c.* FROM cliente c WHERE c.id_cliente like :nome ");
+		$relatorio=$conexao->prepare("SELECT c.*, COUNT(p.cliente_id_cliente) AS quantidade FROM cliente c INNER JOIN pedido p ON c.id_cliente = p.cliente_id_cliente WHERE c.id_cliente like :nome GROUP BY id_cliente ORDER BY id_cliente DESC");
 		$relatorio->bindValue(":nome",$name.'%');
 		$relatorio->execute();
         $tabela = "<table class='table table-striped'>
@@ -47,6 +48,7 @@ if (isset($_GET["txtnome"]) ) {
 							<th>#</th>
                             <th>nome</th>
                             <th>email</th>
+                            <th>N° pedidos</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,15 +59,17 @@ if (isset($_GET["txtnome"]) ) {
             $return.= "<td>" . ($linha["id_cliente"]) . "</td>";
             $return.= "<td>" . ($linha["nome"]) . "</td>";
             $return.= "<td>" .($linha["email"]) . "</td>";
+            $return.= "<td>" .($linha["quantidade"]) . "</td>";            
             $return.= "</tr>";
         }
         echo $return.="</tbody></table>";
     else:
+    //busca por pedidos
         if (empty($name) ){
-			$relatorio=$conexao->prepare("SELECT c.*, p.* FROM cliente c INNER JOIN  pedido p ON p.cliente_id_cliente = c.id_cliente");		
+			$relatorio=$conexao->prepare("SELECT c.*, p.* FROM cliente c INNER JOIN  pedido p ON p.cliente_id_cliente = c.id_cliente ORDER BY id_pedido DESC");		
 			$relatorio->execute();
 		}else{
-			$relatorio=$conexao->prepare("SELECT c.*,p.* FROM cliente c INNER JOIN pedido p ON  c.id_cliente = p.cliente_id_cliente WHERE p.id_pedido like :nome ");
+			$relatorio=$conexao->prepare("SELECT c.*,p.* FROM cliente c INNER JOIN pedido p ON  c.id_cliente = p.cliente_id_cliente WHERE p.id_pedido like :nome ORDER BY id_pedido DESC");
 			$relatorio->bindValue(":nome",$name.'%');
 			$relatorio->execute();
 		}

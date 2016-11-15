@@ -1,6 +1,6 @@
 <?php
     include('conexao.php');
-    $conexao = $pdo;
+    $conexao = Conexao();
 
     $dash = $conexao->prepare("SELECT id_pedido , status  FROM pedido");
     $dash->execute();
@@ -11,7 +11,7 @@
     $i = 0;//pedidos cancelados
     $j = 0;//pedidos enviados
     $k = 0;//total de pedidos
-    $l = 0;//
+    $l = 0;//total clientes
     
     foreach($dash as $row){
         if($row['status']=='cancelado'): 
@@ -32,6 +32,8 @@
      //echo $l;
     $dboard_cancelados = "$i , ".number_format($i/$k*100, 2, '.', ',')  . " % ";
 
+
+//atualizar pedido com valo e status
     if(isset($_POST['status']) AND isset($_POST['valor'])  AND isset($_POST['idPedido'])):
         $status = $_POST['status'];
         $valor = $_POST['valor'];

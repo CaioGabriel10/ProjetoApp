@@ -1,6 +1,6 @@
 <?php
 	include_once('conexao.php');
-    $conexao = $pdo;
+    $conexao = Conexao();
     
     //PEGANDO ID DO USUARIO PARA CONSULTAR OS PEDIDOS
     $email = $_SESSION['usuarioSession'];

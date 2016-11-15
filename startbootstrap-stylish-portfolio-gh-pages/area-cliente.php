@@ -165,7 +165,7 @@
 							
 								<div class="row">
 									<div class="col-xs-12   col-sm-12   col-md-12  col-lg-12">
-											<textarea class="form-control" id="motivo" name="motivo" rows="5" placeholder="descreva o motivo do cancelamento. "></textarea>
+											<textarea class="form-control" id="motivo" name="motivo" rows="5" placeholder="descreva o motivo do cancelamento." maxlength="100"></textarea>
 									</div>
 									<input type="hidden" value="1" name="codcancela" id="codcancela">
 								</div>
