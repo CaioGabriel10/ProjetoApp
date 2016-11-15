@@ -1,6 +1,6 @@
 # ProjetoApp
 
-Projeto de aplicativo web para apresentação no CECON TI.
+SISTEMA PARA LOJA DE MANUTENÇÃO CJR, aplicação web para apresentação na Feira Cultural do Cecon de Belo Horizonte.
 
 ## Teamplate Usado
 
