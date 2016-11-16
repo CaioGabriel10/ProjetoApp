@@ -6,10 +6,12 @@ session_start();
 if(isset($_COOKIE['cookie_user']) AND isset($_COOKIE['cookie_pass'])){
 	header("Location: novo-pedido.php");
 
-}else if(isset($_SESSION['usuarioSession'])){
+}else if(isset($_SESSION['usuarioSession']) AND !isset($_SESSION['id'])){
 
 	header("Location: novo-pedido.php");
 
+}elseif(isset($_SESSION['usuarioSession']) AND isset($_SESSION['id']) ==1){
+	header("Location: area-funcionario.php");
 }else{	
 	unset($_SESSION["usuarioSession"]);
 	session_destroy();
@@ -109,7 +111,7 @@ if(isset($_COOKIE['cookie_user']) AND isset($_COOKIE['cookie_pass'])){
 						<h4 class="modal-title">Entre em sua conta:</h4>
 					</div>
 
-					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="php/inserir-conta.php">
+					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
 						<br>
 						<label for="email" class="sr-only">Email</label>
 						<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="" maxlength="45">
