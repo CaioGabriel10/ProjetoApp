@@ -2,6 +2,12 @@
 <?php 
 	include('php/restrito.php');
 	include('php/dboard_relatorio.php');
+
+
+if(isset($_SESSION['id']) != 1 || !isset($_SESSION['id']) ):
+    header("Location: ./area-cliente.php");
+endif;
+
 ?>
 <html lang="pt-BR">
 
@@ -293,16 +299,16 @@
 												</ul>
 												<div class="tab-content" id="infopedido"> 
 													<div class="tab-pane fade active in" role="tabpanel" id="email" aria-labelledby="email-tab1">
-														<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
+														<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:EnviarEmail();">
 															<br>
 															<label for="email" class="sr-only">E-mail</label>
-															<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="">
+															<input type="email" id="Eemail" name="Eemail" class="form-control" placeholder="Email" required="">
 															<br>
 															<label for="senha" class="sr-only">Assunto</label>
-															<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Assunto" required="">
+															<input type="text" id="Eassunto" name="Eassunto" class="form-control" placeholder="Assunto" required="">
 															<br> 
-															<label for="conteudo" class="sr-only">Assunto</label>
-															 <textarea class="form-control" id="conteudo" name="conteudo" rows="7" placeholder="Mensagem" required=""></textarea>															
+															<label for="conteudo" class="sr-only">conteudo</label>
+															 <textarea class="form-control" id="Econteudo" name="Econteudo" rows="7" placeholder="Mensagem" required=""></textarea>															
 															<br>
 															<button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
 														</form>
@@ -316,14 +322,14 @@
 																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
 																		<div class='input-group '>
 																			<div class='input-group-addon' >Nome</div>
-																			<input class='form-control' id="rnome" name="rnome"  placeholder='nome usuario' disabled>
+																			<input class='form-control' id="rnome" name="rnome"  placeholder='nome usuario' readonly>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
 																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
 																		<div class='input-group'>
 																			<div class='input-group-addon'>Email</div>
-																			<input class='form-control' id='remail' name='remail'  placeholder="email do usuario" disabled/>
+																			<input class='form-control' id='remail' name='remail'  placeholder="email do usuario" readonly/>
 																		</div>
 																		<br>
 																	</div>
@@ -332,14 +338,14 @@
 																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
 																		<div class='input-group '>
 																			<div class='input-group-addon' >Dispositivo</div>
-																			<input class='form-control' id='rdispositivo' name='rdispositivo' placeholder='dispositivo usuario' disabled>
+																			<input class='form-control' id='rdispositivo' name='rdispositivo' placeholder='dispositivo usuario' readonly>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
 																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
 																		<div class='input-group'>
 																			<div class='input-group-addon'>Servico</div>
-																			<input class='form-control' id='rservico' name='rservico' placeholder='servico usuario' disabled>
+																			<input class='form-control' id='rservico' name='rservico' placeholder='servico usuario' readonly>
 																		</div>
 																		<br>
 																	</div>
@@ -348,14 +354,14 @@
 																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
 																		<div class='input-group '>
 																			<div class='input-group-addon' >Status</div>
-																			<input class='form-control' id='rstatus' name='rstatus' placeholder='status pedido' disabled>
+																			<input class='form-control' id='rstatus' name='rstatus' placeholder='status pedido' readonly>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
 																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
 																		<div class='input-group'>
 																			<div class='input-group-addon'>Valor</div>
-																			<input class='form-control' id='rvalor' name='rvalor' placeholder='valor do pedido' disabled>
+																			<input class='form-control' id='rvalor' name='rvalor' placeholder='valor do pedido' readonly>
 																		</div>
 																		<br>
 																	</div>
@@ -364,7 +370,7 @@
 																	<div class='col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2'>
 																		<div class='input-group'>
 																			<div class='input-group-addon'>descrição</div>
-																			<textarea class='form-control' id='rdescricao' name='rdescricao' rows='5' placeholder='descricao pedido' disabled></textarea>
+																			<textarea class='form-control' id='rdescricao' name='rdescricao' rows='5' placeholder='descricao pedido' readonly></textarea>
 																		</div>
 																	</div>
 																</div>

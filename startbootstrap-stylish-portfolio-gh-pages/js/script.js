@@ -1,3 +1,70 @@
+function EnviarEmail(){
+Eemail = 'Eemail=' + $('#Eemail').val();
+Eassunto = 'Eassunto=' + $('#Eassunto').val();
+Econteudo = 'Econteudo=' + $('#Econteudo').val();
+rnome = 'rnome=' + $('#rnome').val();
+rdispositivo = 'rdispositivo=' + $('#rdispositivo').val();
+
+var selected = new Array();
+	$("input:radio[id=valorp]:checked").each(function() {
+       selected.push($(this).val());
+  	});
+codigoPedido = 'codigoPedido=' +  selected;
+rservico = 'rservico=' + $('#rservico').val();
+
+
+	data = Eemail + '&' + Eassunto + '&' + Econteudo+ '&' + rnome + '&' + rdispositivo + '&' + codigoPedido + '&' + rservico;
+
+	//Começa aqui o pedido ajax
+	$.ajax({
+		//Tipo do pedido que, neste caso, é POST
+        type: 'POST', 
+        /*
+         * URL do ficheiro que para o qual iremos enviar os dados. 
+         * Pode ser um url absoluto ou relativo.
+         */
+        url: 'php/email.php', 
+        //Que dados vamos enviar? A variável "data"
+        data: data,
+        //O tipo da informação da resposta
+        dataType: 'json'
+    }).done(function(response) {
+
+    	/* 
+    	 * Quando a chamada Ajax é terminada com sucesso,
+    	 * o javascript confirma o status da operação
+    	 * com a variável que enviámos no formato json.
+    	 */
+        if(response.status == 1) {
+			
+			var div = document.getElementById("textDivUP");
+			div.textContent = "e-mail enviado com sucesso.";
+			var text = div.textContent;
+			
+			
+
+        } else {
+        	//Caso contrário dizemos que aconteceu algum erro.
+			var div = document.getElementById("textDivUP");
+			div.textContent = "problema ao enviar o e-mail.";
+			var text = div.textContent;
+        }
+
+    }).fail(function(xhr, desc, err) {
+    	/*
+    	 * Caso haja algum erro na chamada Ajax,
+    	 * o utilizador é alertado e serão enviados detalhes
+    	 * para a consola javascript que pode ser visualizada 
+    	 * através das ferramentas de desenvolvedor do browser.
+    	 */
+		var div = document.getElementById("textDivUP");
+		div.textContent = "Uups! Ocorreu algum erro! NO CÓDIGO!" + data;
+		var text = div.textContent;
+		
+        console.log(xhr);
+        console.log("Detalhes: " + desc + "\nErro:" + err);
+    });
+}
 function FuncAttPedido() {
 	
 	/*

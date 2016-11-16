@@ -37,7 +37,7 @@
 			unset($_SESSION['usuarioSession']);
 		}
 	//logando
-	} else if($Lnome=="none" AND !empty($Lemail) AND !empty($Lsenha)){
+	} elseif($Lnome=="none" AND !empty($Lemail) AND !empty($Lsenha)){
 		$validarLOGIN= $conexao->prepare("SELECT * FROM cliente WHERE email=:email AND senha=:senha");
 		$validarLOGIN->bindValue(":email",$Lemail);
 		$validarLOGIN->bindValue(":senha",$Lsenha);
@@ -48,21 +48,24 @@
 		$Vpass=$linha["senha"];
 		$Vid=$linha["id_cliente"];
 		
-			if($Vuser == $Lemail AND $Vpass==$Lsenha){
-				if($Vid == 1){
-					header("Location: ../area-funcionario.php");
-					
-				}else{
-					header("Location: ../area-cliente.php");
-					$_SESSION['usuarioSession'] = $Vuser;
-					//session_cache_expire(1);
-					//fazendo biscoito para 7 dias
-					//$resultado['status'] = 3;
-					if($Mlogado == '1'){
-						setcookie("cookie_user",$Lemail,time()+86400,"/ProjetoApp","localhost","0","0");
-						setcookie("cookie_pass",$Lsenha,time()+86400,"/ProjetoApp","localhost","0","0");
-					}
+			if($Vuser == $Lemail AND $Vpass == $Lsenha){
+
+				if($Vid != 1){
+				header("Location: ../novo-pedido.php");
+				$_SESSION['usuarioSession'] = $Vuser;
+				//session_cache_expire(1);
+				//fazendo biscoito para 7 dias
+				//$resultado['status'] = 3;
+				if($Mlogado == '1'){
+					setcookie("cookie_user",$Lemail,time()+86400,"/ProjetoApp","localhost","0","0");
+					setcookie("cookie_pass",$Lsenha,time()+86400,"/ProjetoApp","localhost","0","0");
 				}
+				
+			}else{
+				header("Location: ../area-funcionario.php");
+				$_SESSION['usuarioSession'] = $Vuser;
+				$_SESSION['id'] = $Vid;
+			}
 			}else {
 				$resultado['status'] = 2;
 				//apagar usuário sessao
