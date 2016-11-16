@@ -18,7 +18,9 @@
     $resultado =  array();
     
 //PEGANDO ID DO USUARIO PARA PREENCHER A FOREIGN KEY
+    if(!$_SESSION['usuarioSession']){
     $_SESSION['usuarioSession'] = $_COOKIE['cookie_user'];
+    }
     $email = $_SESSION['usuarioSession'];
 	$cliente = $conexao->prepare("SELECT * FROM cliente WHERE  email=:email");
 	$cliente->bindValue(":email",$email);
