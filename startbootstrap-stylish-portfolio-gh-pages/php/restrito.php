@@ -22,4 +22,5 @@ elseif(!isset($_SESSION['usuarioSession']) AND !isset($_COOKIE['cookie_user']) A
     setcookie("cookie_pass","",time()-1);
     header("location: ./cadastro.php");
 endif;
+
 ?>

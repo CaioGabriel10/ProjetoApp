@@ -109,7 +109,7 @@ if(isset($_COOKIE['cookie_user']) AND isset($_COOKIE['cookie_pass'])){
 						<h4 class="modal-title">Entre em sua conta:</h4>
 					</div>
 
-					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
+					<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="php/inserir-conta.php">
 						<br>
 						<label for="email" class="sr-only">Email</label>
 						<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="" maxlength="45">
