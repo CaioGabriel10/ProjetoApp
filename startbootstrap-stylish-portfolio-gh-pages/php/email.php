@@ -1,7 +1,6 @@
 <?php
-	$to ="teste@sistemavan.16mb.com";//email do site
 
-	$de = $_POST['Eemail']; //email cliente
+	$to = $_POST['Eemail'];
 	$assunto = $_POST['Eassunto'];
 	$conteudo = $_POST['Econteudo'];
   	$nomeCliente = $_POST['rnome'];
@@ -20,7 +19,6 @@ $arquivo ="
 <html>
 <head>
 <meta name='viewport' content='width=device-width' />
-<meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
 <link rel='stylesheet' type='text/css' href='../css/email.css' />
 </head>
  
@@ -32,8 +30,7 @@ $arquivo ="
 				<div class='content'>
 					<table bgcolor='#337ab7'>
 					<tr>
-						<td><img src='../img/logo.png' /></td>
-						<td align='right'><h1 class='collapse'>CJR</h1></td>
+						<td align='right'><h1 class='collapse'>CJR - Manutenção</h1></td>
 					</tr>
 				</table>
 				</div>				
@@ -51,10 +48,10 @@ $arquivo ="
 				<tr>
 					<td>						
 						<h3>Tudo Bem, $nomeCliente</h3>
-						<p class='lead'>Uma nova atualização em seu pedido $codigoPedido - $DispositivoPedido.</p>
+						<p class='lead'>Uma nova atualizaÃ§Ã£o em seu pedido $codigoPedido - $DispositivoPedido.</p>
 						<br>
-						<h3>Menssagem</h3>
-						<p$conteudo</p>
+						<h3>Mensagem</h3>
+						<p>$conteudo</p>
 						<br/>
 						<br/>							
 					</td>
@@ -74,10 +71,10 @@ $arquivo ="
 
 //enviar
 	
-	// emails para quem será enviado o formulário
-	$assunto = "pedido atualizado: $servicoPedido - $DispositivoPedido";
+	// emails para quem serÃ¡ enviado o formulÃ¡rio
+	
 
-	// É necessário indicar que o formato do e-mail é html
+	// Ã‰ necessÃ¡rio indicar que o formato do e-mail Ã© html
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= "From: $de "."\r\n";
     $headers .= 'Content-type: text/html; charset= utf8' . "\r\n";
@@ -85,11 +82,13 @@ $arquivo ="
 	
 	
 	$enviaremail = mail($to, $assunto, $arquivo, $headers);
-	if($enviaremail){
+        $enviaremail2 = mail($to2, $assunto, $arquivo, $headers);
+	if($enviaremail && $enviaremail2){
 	    $resultado['status'] = 1;
 	} else {
         $resultado['status'] = 2;	
 	}
+        
     header('Content-type: application/json');
 
     echo json_encode($resultado);
