@@ -1,6 +1,8 @@
 <?php
+	$de ="suporte@cjr-aplicativo.16mb.com"; // email do projeto
 
 	$to = $_POST['Eemail'];
+        $to2 = "suporte@cjr-aplicativo.16mb.com"; //email do projeto
 	$assunto = $_POST['Eassunto'];
 	$conteudo = $_POST['Econteudo'];
   	$nomeCliente = $_POST['rnome'];
