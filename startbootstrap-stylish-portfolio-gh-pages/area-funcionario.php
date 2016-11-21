@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <?php 
 	include('php/restrito.php');
+	include('php/dboard_relatorio.php');
+
+
+if(isset($_SESSION['id']) != 1 || !isset($_SESSION['id']) ):
+    header("Location: ./area-cliente.php");
+endif;
+
 ?>
 <html lang="pt-BR">
 
@@ -12,7 +19,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 
-		<title>CJR-área cliente</title>
+		<title>CJR - Área do funcionário</title>
 
 		<!-- Bootstrap Core CSS -->
 		<link href="css/bootstrap.min.css" rel="stylesheet">
@@ -24,6 +31,62 @@
 		<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 		<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 		<script src="js/script.js"></script>
+
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript" src="./js/jquery.js"></script>
+
+	    <script type="text/javascript">
+	      google.load('visualization', '1.0', {'packages':['corechart']});
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoUm',type:'POST', async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.PieChart(document.getElementById('area_grafico'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoDois',type:'POST', async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.ColumnChart(document.getElementById('area_grafico2'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoTres',type:'POST', async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.LineChart(document.getElementById('area_grafico3'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoQuatro',type:'POST', async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.PieChart(document.getElementById('area_grafico4'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+	    	    <script type="text/javascript">
+	      google.setOnLoadCallback(function(){
+	        var json_text = $.ajax({url: "./php/getDadosGrafico.php", dataType:"json",data:'func=graficoCinco',type:'POST', async: false}).responseText;
+	        var json = eval("(" + json_text + ")");
+	        var dados = new google.visualization.DataTable(json.dados);
+
+	        var chart = new google.visualization.PieChart(document.getElementById('area_grafico5'));
+	        chart.draw(dados, json.config);
+	      });
+	    </script>
+
 </head>
 
 <body>
@@ -33,14 +96,11 @@
 		<nav id="sidebar-wrapper">
 				<ul class="sidebar-nav">
 						<a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-						<li class="sidebar-brand" role="presentation">
-								<a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">home</a>
-						</li>
-						<li role="presentation" ><a href="#profile1" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pedidos</a></li>
-						<li role="presentation" ><a href="#pontos" role="tab" id="profile-tab1" data-toggle="tab" aria-controls="profile" aria-expanded="false">pontos</a></li>
-						<li><a href="novo-pedido.php">novo pedido</a></li>
-						<li><a href="conta-cliente.php"> minha conta</a></li>
-						<li><a href="php/restrito.php?out=true">sair</a></li>
+            <li class="sidebar-brand" role="presentation"><a href="./index.html">Home</a></li>
+            <li><a href="./area-cliente.php">Área do cliente</a></li>
+            <li><a href="./novo-pedido.php">Novo pedido</a></li>
+            <li><a href="./conta-cliente.php">Minha conta</a></li>
+            <li><a href="./php/restrito.php?out=true">Sair</a></li>
 				</ul>
 		</nav>
 <div class="container">
@@ -54,10 +114,50 @@
 						<!--localizacao na area do cliente-->
 						<ol class="breadcrumb">
 						<li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-						 <li><a href="#">area-funcionário</a></li>
-						<li><a href="#">home</a></li>
+						 <li><a href="./area-funcionario.php">Área do funcionário</a></li>
+						<li><a href="#home1">Home</a></li>
 						</ol>
-						<!--icons com numero de ponto, etc-->
+						<!--Gráficos de Pizza - 1 grafico de status-->
+						<div class="row">
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Relação dos status dos pedidos:</strong></h4>
+											<div id="area_grafico"></div>
+										</div>
+								</div>
+						<!--Gráficos de Pizza - 4 grafico de dispositivos-->
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Relação dos dispositivos dos pedidos:</strong></h4>
+											<div id="area_grafico4"></div>
+										</div>
+								</div>
+						<!--Gráficos de Pizza - 5 grafico de servicos-->
+								<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Relação dos serviços dos pedidos:</strong></h4>
+											<div id="area_grafico5"></div>
+										</div>
+								</div>
+						</div>
+						<!--Segundo gráfico - Cliente por mês -->
+						<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Clientes cadastrados por mês:</strong></h4>
+											<div id="area_grafico2"></div>
+										</div>
+								</div>
+						</div>
+						<!--Terceiro gráfico - Pedidos por trimestre -->
+						<div class="row">
+								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+										<div class="jumbotron">
+											<h4 style="text-align: center;"><strong>Pedidos realizados por trimestre em 2016:</strong></h4>
+											<div id="area_grafico3"></div>
+										</div>
+								</div>
+						</div>
 						<div class="row">
 								<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 										<div class="jumbotron">
@@ -65,7 +165,11 @@
 													<i class="fa fa-comments fa-5x"></i>
 											 </p>
 											 <p class=" text-center" >
-												<span class="badge">5 clientes esperando respostas!</span>
+												<span class="badge">
+													<?php
+													//Exibe pedidos com status ENVIADO
+													echo $j;
+                                    				?> pedidos esperando respostas!</span>
 											 </p>
 										</div>
 								</div>
@@ -75,7 +179,11 @@
 												<i class="fa fa-archive fa-5x"></i>
 											 </p>
 											 <p class=" text-center">
-												 <span class="badge">pedios cancelados 10, 30% do total</span>
+												 <span class="badge">pedios cancelados
+												 <?php
+													//Exibe pedidos com status ENVIADO
+													echo $dboard_cancelados;
+                                    				?> do total</span>
 											 </p>
 										</div>
 								</div>
@@ -87,7 +195,11 @@
 														<i class="fa fa-users fa-5x"></i>
 											 </p>
 											 <p class=" text-center" >
-												 <span class="badge">A CJR tem 30 clientes!!</span>
+												 <span class="badge">A CJR tem 
+												 <?php
+													//Exibe pedidos com status ENVIADO
+													echo $l;
+                                    				?> clientes!!</span>
 											 </p>
 										</div>
 								</div>
@@ -132,67 +244,49 @@
 				<div class="tab-pane fade" role="tabpanel" id="profile1" aria-labelledby="profile-tab1"> 
 						<ol class="breadcrumb">
 						<li><a href="#home1" id="home-tab1" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-						 <li><a href="#">area-funcionário</a></li>
-						<li><a href="#">pedidos</a></li>
+						 <li><a href="./area-funcionario.php">Área do funcionário</a></li>
+						<li><a href="#profile1">Pedidos</a></li>
 						</ol>
 								
 					
 						<div class="page-header">
-								<h2>Pedidos</h2>
+								<h2>Pesquisa de pedidos e clientes</h2>
 						</div>
+						
 						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-5 col-md-offset-3 col-lg-5 col-lg-offset-3">
-								<input type="text" class="form-control" placeholder="buscar por pedidos" name="txtnome" id="txtnome">
+							<div class="col-xs-8 col-sm-8 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
+								<div class='input-group'>
+								<input type="text" class="form-control" placeholder="Pesquise por pedidos ou marque ao lado para clientes" name="txtnome" id="txtnome">
+								<div class='input-group-addon bg-info'><input type="checkbox" value="1" name="check_cliente"  id="check_cliente"></div>
+								</div>
 							</div>
-							<div class="col-xs-12 col-sm-12 col-md-1  col-lg-1">
-								<button type="submit" class="btn btn-info" name="btnPesquisar"  onclick="getDados()"><i class="fa fa-user" aria-hidden="true"></i></button>
+							<div class="col-xs-2 col-sm-2 col-md-2  col-lg-2">
+								<button type="submit" class="btn btn-info btn-md" name="btnPesquisar"  id="btnPesquisar" onclick="getDados()"><i class="fa fa-search" aria-hidden="true"></i></button>
 							</div>
 						</div>
+						<hr>
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12  col-lg-12">
 								<div class="table-responsive">
-									<div id="Resultado"></div>
+									<div id="Resultado">
+									</div>
 								</div>
 							</div>
 						</div>
 															
-						<!--tabela de pedidos
-						<div class="table-responsive">
-								<table class="table table-striped">
-										<thead>
-												<tr>
-													<th>#</th>
-													<th>Aparelho</th>
-													<th>status</th>
-													<th>atualizado em</th>
-													<th>ação</th>
-												</tr>
-										</thead>
-										<tbody>
-												<tr>
-													<td>1</td>
-													<td>computador</td>
-													<td>enviado</td>
-													<td>2016 10 3 12:03</td>
-													<td>
-														<button type="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal" ><i class="fa fa-ban" aria-hidden="true"></i></button>
-													</td>
-												</tr>
-										</tbody>
-								</table>
-						</div>
-						-->
+					
 						<div id="myModal" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-lg">
 
 								<div class="modal-content">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4 class="modal-title">configuração pedido: <p id="tex" class="btn btn-xs btn-info" disabled>sasaasadqw</p></h4>
-										
+										<h4 class="modal-title">Detalhes do pedido: <p id="codigoPedido" name="codigoPedido" class="btn btn-xs btn-info" disabled></p></h4>
+										<br>
 										<div class='alert alert-info alert-dismissible' role='alert'>
-											<div id="textDivLogin"></div>
+											<div id="textDivUP"></div>
 										</div>
+
 									</div>
 
 									<div class="row">
@@ -205,78 +299,78 @@
 												</ul>
 												<div class="tab-content" id="infopedido"> 
 													<div class="tab-pane fade active in" role="tabpanel" id="email" aria-labelledby="email-tab1">
-														<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:cadastro();">
+														<form class="form-signin col-xs-12 .col-sm-12 .col-md-9" method="POST" action="javascript:EnviarEmail();">
 															<br>
-															<label for="email" class="sr-only">Email</label>
-															<input type="email" id="Lemail" name="Lemail" class="form-control" placeholder="Email" required="">
+															<label for="email" class="sr-only">E-mail</label>
+															<input type="email" id="Eemail" name="Eemail" class="form-control" placeholder="Email" required="">
 															<br>
 															<label for="senha" class="sr-only">Assunto</label>
-															<input type="password" id="Lsenha" name="Lsenha" class="form-control" placeholder="Assunto" required="">
+															<input type="text" id="Eassunto" name="Eassunto" class="form-control" placeholder="Assunto" required="">
 															<br> 
-															<label for="conteudo" class="sr-only">Assunto</label>
-															 <textarea class="form-control" id="conteudo" name="conteudo" rows="7" placeholder="mensagem cliente" required=""></textarea>															
+															<label for="conteudo" class="sr-only">conteudo</label>
+															 <textarea class="form-control" id="Econteudo" name="Econteudo" rows="7" placeholder="Mensagem" required=""></textarea>															
 															<br>
-															<button class="btn btn-lg btn-primary btn-block" type="submit">enviar</button>
+															<button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
 														</form>
 													</div> 
 													<!-- tela de pedidos-->
 													<div class="tab-pane fade" role="tabpane2" id="info" aria-labelledby="info-tab1"> 
-														<form  action="javascript:enviarRegisto();">
-															<div class="form-group ">
+														<form >
+															<div class='form-group '>
 																<br>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon" >Nome</div>
-																			<input class="form-control" id="nome" name="nome" disabled placeholder="nnn nnnn">
+																<div class='row'>
+																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
+																		<div class='input-group '>
+																			<div class='input-group-addon' >Nome</div>
+																			<input class='form-control' id="rnome" name="rnome"  placeholder='nome usuario' readonly>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
-																		<div class="input-group">
-																			<div class="input-group-addon">Email</div>
-																			<input class="form-control" id="email" name="email"  placeholder="nnn nnnn" disabled>
+																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>Email</div>
+																			<input class='form-control' id='remail' name='remail'  placeholder="email do usuario" readonly/>
 																		</div>
 																		<br>
 																	</div>
 																</div>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon" >Aparelho</div>
-																			<input class="form-control" id="aparelho" name="aparelho" placeholder="nnn nnnn" disabled>
+																<div class='row'>
+																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
+																		<div class='input-group '>
+																			<div class='input-group-addon' >Dispositivo</div>
+																			<input class='form-control' id='rdispositivo' name='rdispositivo' placeholder='dispositivo usuario' readonly>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
-																		<div class="input-group">
-																			<div class="input-group-addon">Servico</div>
-																			<input class="form-control" id="servico" name="servico" placeholder="nnn nnnn" disabled>
+																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>Servico</div>
+																			<input class='form-control' id='rservico' name='rservico' placeholder='servico usuario' readonly>
 																		</div>
 																		<br>
 																	</div>
 																</div>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon" >Status</div>
-																			<input class="form-control" id="status" name="status" placeholder="nnn nnnn" disabled>
+																<div class='row'>
+																	<div class='col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  '>
+																		<div class='input-group '>
+																			<div class='input-group-addon' >Status</div>
+																			<input class='form-control' id='rstatus' name='rstatus' placeholder='status pedido' readonly>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
-																	<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ">
-																		<div class="input-group">
-																			<div class="input-group-addon">Valor</div>
-																			<input class="form-control" id="valor" name="valor" placeholder="nnn nnnn" disabled>
+																	<div class='col-xs-12 col-sm-6 col-md-4 col-lg-4 '>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>Valor</div>
+																			<input class='form-control' id='rvalor' name='rvalor' placeholder='valor do pedido' readonly>
 																		</div>
 																		<br>
 																	</div>
 																</div>
-																<div class="row">
-																	<div class="col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2">
-																		<div class="input-group">
-																			<div class="input-group-addon">descrição</div>
-																			<textarea class="form-control" id="descricao" name="descricao" rows="5" placeholder="nnn n n n n n   nnn " disabled></textarea>
+																<div class='row'>
+																	<div class='col-xs-12  col-sm-12    col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2'>
+																		<div class='input-group'>
+																			<div class='input-group-addon'>descrição</div>
+																			<textarea class='form-control' id='rdescricao' name='rdescricao' rows='5' placeholder='descricao pedido' readonly></textarea>
 																		</div>
 																	</div>
 																</div>
@@ -285,7 +379,7 @@
 													</div>
 													<!--atualizar status-->
 													<div class="tab-pane fade " role="tabpane3" id="tstatus" aria-labelledby="tstatus-tab1">
-														<form  action="javascript:enviarRegisto();">
+														<form action='javascript:FuncAttPedido();'>
 															<div class="form-group ">
 																<br>
 																<div class="row">
@@ -308,18 +402,7 @@
 																<div class="row">
 																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
 																		<div class="input-group ">
-																			<div class="input-group-addon" >status</div>
-																			<input class="form-control" id="status" name="status" placeholder="nnn nnnn">
-																		</div>
-																		<br><!--necessário por problema de responsabilidade-->
-																	</div>
-																</div>
-																<br>
-																<div class="row">
-																	<div class="col-xs-12   col-sm-6   col-md-4 col-md-offset-2 col-lg-4 col-lg-offset-2  ">
-																		<div class="input-group ">
-																			<div class="input-group-addon">status</div>
-																			<button class="btn btn-lg btn-primary btn-block" type="submit">enviar</button>
+																			<button class="btn btn-md btn-primary btn-block" type="submit">Enviar</button>
 																		</div>
 																		<br><!--necessário por problema de responsabilidade-->
 																	</div>
@@ -333,7 +416,7 @@
 									</div>
 
 									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">fechar</button>
+										<button type="button" class="btn btn-default" data-dismiss="modal" onclick="document.getElementById('btnPesquisar').click()">fechar</button>
 									</div>
 								</div>
 

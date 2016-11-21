@@ -1,3 +1,353 @@
+function EnviarEmail(){
+Eemail = 'Eemail=' + $('#Eemail').val();
+Eassunto = 'Eassunto=' + $('#Eassunto').val();
+Econteudo = 'Econteudo=' + $('#Econteudo').val();
+rnome = 'rnome=' + $('#rnome').val();
+rdispositivo = 'rdispositivo=' + $('#rdispositivo').val();
+
+var selected = new Array();
+	$("input:radio[id=valorp]:checked").each(function() {
+       selected.push($(this).val());
+  	});
+codigoPedido = 'codigoPedido=' +  selected;
+rservico = 'rservico=' + $('#rservico').val();
+
+
+	data = Eemail + '&' + Eassunto + '&' + Econteudo+ '&' + rnome + '&' + rdispositivo + '&' + codigoPedido + '&' + rservico;
+
+	//Começa aqui o pedido ajax
+	$.ajax({
+		//Tipo do pedido que, neste caso, é POST
+        type: 'POST', 
+        /*
+         * URL do ficheiro que para o qual iremos enviar os dados. 
+         * Pode ser um url absoluto ou relativo.
+         */
+        url: 'php/email.php', 
+        //Que dados vamos enviar? A variável "data"
+        data: data,
+        //O tipo da informação da resposta
+        dataType: 'json'
+    }).done(function(response) {
+
+    	/* 
+    	 * Quando a chamada Ajax é terminada com sucesso,
+    	 * o javascript confirma o status da operação
+    	 * com a variável que enviámos no formato json.
+    	 */
+        if(response.status == 1) {
+			
+			var div = document.getElementById("textDivUP");
+			div.textContent = "e-mail enviado com sucesso.";
+			var text = div.textContent;
+			
+			
+
+        } else {
+        	//Caso contrário dizemos que aconteceu algum erro.
+			var div = document.getElementById("textDivUP");
+			div.textContent = "problema ao enviar o e-mail.";
+			var text = div.textContent;
+        }
+
+    }).fail(function(xhr, desc, err) {
+    	/*
+    	 * Caso haja algum erro na chamada Ajax,
+    	 * o utilizador é alertado e serão enviados detalhes
+    	 * para a consola javascript que pode ser visualizada 
+    	 * através das ferramentas de desenvolvedor do browser.
+    	 */
+		var div = document.getElementById("textDivUP");
+		div.textContent = "Uups! Ocorreu algum erro! NO CÓDIGO!" + data;
+		var text = div.textContent;
+		
+        console.log(xhr);
+        console.log("Detalhes: " + desc + "\nErro:" + err);
+    });
+}
+function FuncAttPedido() {
+	
+	/*
+	 * Obtenção dos dados do formulário e colocação dos mesmos
+	 * no formato nomeDaInfo=Info para enviar por POST.
+	 *
+	 * Utiliza-se a função val() para obter os valores
+	 * dos inputs com os id's em questão.
+	 */
+
+		var selected = new Array();
+	$("input:radio[id=valorp]:checked").each(function() {
+       selected.push($(this).val());
+  	});
+
+	idPedido = 'idPedido=' +  selected;
+	status = 'status=' + $('#status').val();
+	valor = 'valor=' + $('#valor').val();
+
+	/*
+	 * Criação da variável data que vai conter toda a informação
+	 * a enviar para o servidor.
+	 */
+	data = idPedido + '&' + status + '&' + valor;
+
+	//Começa aqui o pedido ajax
+	$.ajax({
+		//Tipo do pedido que, neste caso, é POST
+        type: 'POST', 
+        /*
+         * URL do ficheiro que para o qual iremos enviar os dados. 
+         * Pode ser um url absoluto ou relativo.
+         */
+        url: 'php/dboard_relatorio.php', 
+        //Que dados vamos enviar? A variável "data"
+        data: data,
+        //O tipo da informação da resposta
+        dataType: 'json'
+    }).done(function(response) {
+
+    	/* 
+    	 * Quando a chamada Ajax é terminada com sucesso,
+    	 * o javascript confirma o status da operação
+    	 * com a variável que enviámos no formato json.
+    	 */
+        if(response.status == 1) {
+        	//Se for positivo, mostra ao utilizador uma janela de sucesso.
+			var div = document.getElementById("textDivUP");
+			div.textContent = "Pedido atualizado com sucesso." + idPedido + status + valor;
+			var text = div.textContent;
+
+			//CHAMA FUNCAO
+			RelatorioPedido();
+			
+			//PARA ATUALIZAR A TABELA
+			//document.getElementById("btnPesquisar").click();
+        } else {
+        	//Caso contrário dizemos que aconteceu algum erro.
+			var div = document.getElementById("textDivUP");
+			div.textContent = "pedido não atualizado";
+			var text = div.textContent;
+        }
+
+    }).fail(function(xhr, desc, err) {
+    	/*
+    	 * Caso haja algum erro na chamada Ajax,
+    	 * o utilizador é alertado e serão enviados detalhes
+    	 * para a consola javascript que pode ser visualizada 
+    	 * através das ferramentas de desenvolvedor do browser.
+    	 */
+		var div = document.getElementById("textDivUP");
+		div.textContent = "Uups! Ocorreu algum erro! NO CÓDIGO!";
+		var text = div.textContent;
+		
+        console.log(xhr);
+        console.log("Detalhes: " + desc + "\nErro:" + err);
+    });
+}
+function RelatorioPedido() {
+	
+	/*
+	 * Obtenção dos dados do formulário e colocação dos mesmos
+	 * no formato nomeDaInfo=Info para enviar por POST.
+	 *
+	 * Utiliza-se a função val() para obter os valores
+	 * dos inputs com os id's em questão.
+	 */
+	
+	var selected = new Array();
+	$("input:radio[id=valorp]:checked").each(function() {
+       selected.push($(this).val());
+  });/*
+	if( $('#cancelar').is(':checked') ){
+		cancelar = 'cancelar=' + $('#cancelar').val();
+	}else{
+		cancelar = 'cancelar=' + $('#cancelar').val('0');
+	}	*/
+	valorp = 'valorp=' + selected;
+	//valorp = 'valorp=' + $('#valorp').val();
+	//sadmin = 'sadmin=' + $('#sadmin').val();
+
+	
+	
+	/*
+	 * Criação da variável data que vai conter toda a informação
+	 * a enviar para o servidor.
+	 */
+	data = valorp;
+
+	//Começa aqui o pedido ajax
+	$.ajax({
+		//Tipo do pedido que, neste caso, é POST
+        type: 'POST', 
+        /*
+         * URL do ficheiro que para o qual iremos enviar os dados. 
+         * Pode ser um url absoluto ou relativo.
+         */
+        url: 'php/relatorio-func.php', 
+        //Que dados vamos enviar? A variável "data"
+        data: data,
+        //O tipo da informação da resposta
+        dataType: 'json'
+    }).done(function(response) {
+
+    	/* 
+    	 * Quando a chamada Ajax é terminada com sucesso,
+    	 * o javascript confirma o status da operação
+    	 * com a variável que enviámos no formato json.
+    	 */
+        if(response.dado == 1) {
+			$("#rnome").val(response.nome);
+			$("#remail").val(response.email);
+			$("#rdispositivo").val(response.dispositivo);
+			$("#rservico").val(response.servico);
+			$("#rstatus").val(response.status);
+			$("#status").val(response.status);
+			$("#rdescricao").val(response.descricao);
+			$("#rvalor").val(response.valor);
+			$("#valor").val(response.valor);
+
+			var div = document.getElementById("codigoPedido");
+			div.textContent = response.cod;
+			var text = div.textContent;
+			
+			
+
+			/*var div = document.getElementById("textpedido");
+			div.textContent = "valor  fucionou " + data + response.status;
+			var text = div.textContent;
+			<div id='textpedido' name='textpedido' >aqui</div>
+			*/
+
+        } else {
+        	//Caso contrário dizemos que aconteceu algum erro.
+			var div = document.getElementById("textpedido");
+			div.textContent = "valor  " + data;
+			var text = div.textContent;
+        }
+
+    }).fail(function(xhr, desc, err) {
+    	/*
+    	 * Caso haja algum erro na chamada Ajax,
+    	 * o utilizador é alertado e serão enviados detalhes
+    	 * para a consola javascript que pode ser visualizada 
+    	 * através das ferramentas de desenvolvedor do browser.
+    	 */
+		var div = document.getElementById("textpedido");
+		div.textContent = "Uups! Ocorreu algum erro! NO CÓDIGO!" + data;
+		var text = div.textContent;
+		
+        console.log(xhr);
+        console.log("Detalhes: " + desc + "\nErro:" + err);
+    });
+}
+function CancelarPedido() {
+	
+	/*
+	 * Obtenção dos dados do formulário e colocação dos mesmos
+	 * no formato nomeDaInfo=Info para enviar por POST.
+	 *
+	 * Utiliza-se a função val() para obter os valores
+	 * dos inputs com os id's em questão.
+	 */
+	var selected = new Array();
+	$("input:radio[id=cancelar]:checked").each(function() {
+       selected.push($(this).val());
+  });
+	/*if( $('#cancelar').is(':checked') ){
+		cancelar = 'cancelar=' + $('#cancelar').val();
+	}else{
+		cancelar = 'cancelar=' + $('#cancelar').val('0');
+	}*/	
+	cancelar = 'cancelar=' + selected;
+	motivo = 'motivo=' + $('#motivo').val();
+	cod = 'codcancela=' + $('#codcancela').val();
+
+	
+	
+	/*
+	 * Criação da variável data que vai conter toda a informação
+	 * a enviar para o servidor.
+	 */
+	data = motivo  + '&' + cod + '&' + cancelar;
+
+	//Começa aqui o pedido ajax
+	$.ajax({
+		//Tipo do pedido que, neste caso, é POST
+        type: 'POST', 
+        /*
+         * URL do ficheiro que para o qual iremos enviar os dados. 
+         * Pode ser um url absoluto ou relativo.
+         */
+        url: 'php/pedido.php', 
+        //Que dados vamos enviar? A variável "data"
+        data: data,
+        //O tipo da informação da resposta
+        dataType: 'json'
+    }).done(function(response) {
+
+    	/* 
+    	 * Quando a chamada Ajax é terminada com sucesso,
+    	 * o javascript confirma o status da operação
+    	 * com a variável que enviámos no formato json.
+    	 */
+        if(response.status == 1) {
+        	//Se for positivo, mostra ao utilizador uma janela de sucesso.
+			var div = document.getElementById("textDiv");
+			div.textContent = "pedido cancelado";
+			var text = div.textContent;
+
+			//mudar nome de campo
+			var div = document.getElementById("fechar");
+			div.textContent = "sair";
+			var text = div.textContent;
+			//esconder botao
+			document.getElementById('acao').type = 'hidden';
+
+			//voltar botoes
+			setTimeout(function(){				
+				var div = document.getElementById("fechar");
+				div.textContent = "cancelar";
+				var text = div.textContent;
+
+				var div = document.getElementById("textDiv");
+				div.textContent = "Quer mesmo deletar esse pedido?";
+				var text = div.textContent;
+				//esconder botao
+				document.getElementById('acao').type = 'button';
+			},9000)
+
+			//recarregar a div da tabela
+			$("#reload").load("area-cliente.php #reload");
+			//limpar campo
+			document.getElementById('motivo').value='';
+			document.getElementById('cancelar').checked = false;
+			setTimeout(function(){
+				var div = document.getElementById("textDiv");
+				div.textContent = "clique sair dessa ação para fechar essa tela";
+				var text = div.textContent;
+				
+			},5000)
+        } else {
+        	//Caso contrário dizemos que aconteceu algum erro.
+			var div = document.getElementById("textDiv");
+			div.textContent = "erro ao tentar cancelar o pedido";
+			var text = div.textContent;
+        }
+
+    }).fail(function(xhr, desc, err) {
+    	/*
+    	 * Caso haja algum erro na chamada Ajax,
+    	 * o utilizador é alertado e serão enviados detalhes
+    	 * para a consola javascript que pode ser visualizada 
+    	 * através das ferramentas de desenvolvedor do browser.
+    	 */
+		var div = document.getElementById("textDiv");
+		div.textContent = "Uups! Ocorreu algum erro! NO CÓDIGO!";
+		var text = div.textContent;
+		
+        console.log(xhr);
+        console.log("Detalhes: " + desc + "\nErro:" + err);
+    });
+}
 function enviarRegisto() {
 	
 	/*
@@ -38,11 +388,16 @@ function enviarRegisto() {
     	 * o javascript confirma o status da operação
     	 * com a variável que enviámos no formato json.
     	 */
+		
+
         if(response.status == true) {
         	//Se for positivo, mostra ao utilizador uma janela de sucesso.
 			var div = document.getElementById("textDiv");
 			div.textContent = "pedido enviado para nossa equipe.";
 			var text = div.textContent;
+			
+			$("#reload").load("novo-pedido.php #reload");
+
         } else {
         	//Caso contrário dizemos que aconteceu algum erro.
 			var div = document.getElementById("textDiv");
@@ -194,17 +549,31 @@ function atualizarCliente() {
 			 */
 				if(response.status == 1) {
 			var div = document.getElementById("textDiv");
-			div.textContent = "ATUALIZADO COM SUCESSO!";
+			div.textContent = "Dados atualizados com sucesso!";
 			var text = div.textContent;
 				} else if(response.status == 2){
 			var div = document.getElementById("textDiv");
-			div.textContent = "SUA SENHA ATUAL ESTA ERRADA, TENTE NOVAMENTE!";
+			div.textContent = "Senha atual errada, tente novamente!";
 			var text = div.textContent;
-				} else {
+				} else if(response.status == 3){
 			var div = document.getElementById("textDiv");
-			div.textContent = "TODOS OS CAMPOS SÃO OBRIGATORIOS!";
+			div.textContent = "Senha atual obrigatória!";
 			var text = div.textContent;
-		}
+				} else if(response.status == 4){
+			var div = document.getElementById("textDiv");
+			div.textContent = "Nome atualizado com sucesso!";
+			var text = div.textContent;
+				} else if(response.status == 5){
+			var div = document.getElementById("textDiv");
+			div.textContent = "Senha atualizada com sucesso!";
+			} else {
+			var div = document.getElementById("textDiv");
+			div.textContent = "Preencha os campos a serem atualizados!";
+			}
+
+			document.getElementById('senhaA').value='';
+			document.getElementById('nome').value='';
+			document.getElementById('senha').value='';
 
 		}).fail(function(xhr, desc, err) {
 			/*
@@ -263,8 +632,13 @@ function atualizarCliente() {
      //result.innerHTML = '<img src="Progresso1.gif"/>';
      
      // Iniciar uma requisição
-	 
-     xmlreq.open("GET", "php/relatorio-func.php?txtnome=" + nome, true);
+	if( $('#check_cliente').is(':checked') ){
+		check_cliente = 'check_cliente=' + $('#check_cliente').val();
+		xmlreq.open("GET", "php/relatorio-func.php?txtnome=" + nome +'&' + check_cliente, true);
+	}else{
+		xmlreq.open("GET", "php/relatorio-func.php?txtnome=" + nome, true);
+	}
+     
 	     
      // Atribui uma função para ser executada sempre que houver uma mudança de ado
      xmlreq.onreadystatechange = function(){

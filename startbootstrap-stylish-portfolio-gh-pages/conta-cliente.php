@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <?php 
     include('php/restrito.php');
+    include_once('php/relatorioContaCliente.php');
 ?>
 <html lang="pt-BR">
 
@@ -12,7 +13,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CJR-área cliente</title>
+    <title>CJR - área do cliente</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -34,12 +35,11 @@
     <nav id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand" role="presentation">
-                <a href="area-cliente.php">home</a>
-            </li>
-            <li><a href="novo-pedido.php">novo pedido</a></li>
-            <li><a href="conta-cliente.php"> minha conta</a></li>
-            <li><a href="php/restrito.php?out=true">sair</a></li>
+            <li class="sidebar-brand" role="presentation"><a href="./index.html">Home</a></li>
+            <li><a href="./area-cliente.php">Área do cliente</a></li>
+            <li><a href="./novo-pedido.php">Novo pedido</a></li>
+            <li><a href="./conta-cliente.php">Minha conta</a></li>
+            <li><a href="./php/restrito.php?out=true">Sair</a></li>
         </ul>
     </nav>
 <div class="container">
@@ -60,10 +60,15 @@
             <li><a href="#">minha conta</a></li>
             </ol>
             <div class="page-header">
-                 <h1>Gerencie sua conta<small> :)</small></h1>
+                 <h1>Gerencie sua conta<small></small></h1>
             </div>
             <blockquote>
-                <p>Bem-vindo <strong>Fulano nnnnn nn nnnnnn</strong></p>
+                <p>Bem-vindo,   <strong>
+                    <?php 
+                        //Exibe o nome do cliente
+                        echo $resultado['nome'];
+                    ?>                    
+                </strong></p>
             </blockquote>
             <!--icons com numero de ponto, etc-->
             <div class="row">
@@ -73,51 +78,67 @@
                              <i class="fa fa-lock fa-5x"></i></span> <span class="badge"><i class="fa fa-check"></i></span>
                        </p>
                        <ul class="list-unstyled">
-                          <li class="text-center"> Dados de segurança alterados em  <span class="label label-default ">10/02/2016</span><li>
+                          <li class="text-center"> Dados de segurança alterados em    
+                              <span class="label label-default ">
+                                    <?php
+                                        //Converte a data para o formato BR e exibe.
+                                        $data = $resultado['ultima_att'];
+                                        echo date('d/m/Y H:i', strtotime($data));
+                                    ?>
+                              </span>
+                          <li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <div class="jumbotron">
                         <p class=" text-center">
-                            <i class="fa fa-cogs fa-5x"></i></span> <span class="badge">sem ideia</span>
-                       </p>
+                            <i class="fa fa-cogs fa-5x"></i></span> <span class="badge"></span>
+                        </p>
+                       <ul class="list-unstyled">
+
+                          <li class="text-center"> Seu número de Identificação é    
+                              <span class="label label-default ">
+                                    <?php
+                                        //Exibe o id do cliente
+                                        echo $id_cliente;
+                                    ?>
+                              </span>
+                          <li>
+
+                          <li class="text-center"> Seu email cadastrado é    
+                              <span class="label label-default ">
+                                    <?php
+                                        //Exibe o id do cliente
+                                        echo $resultado['email'];
+                                    ?>
+                              </span>
+                          <li>
+
+                        </ul>
                     </div>
                 </div>
             </div>
 
             <div class="page-header">
-                <h2>Notícias<small> nnnnnnn n</small></h2>
+                <h2>Notícias</h2>
             </div>
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                         <div class="panel panel-info">
-                            <div class="panel-heading bg-danger" role="tab" id="headingOne">
-                                <h4 class="panel-title ">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <strong>noticia</strong> um <span class="label label-default pull-right">2016/03/02</span>
-                                </a>
-                                </h4>
-                            </div>
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <h4 class="panel-title ">
+                                    
+                                    <strong>Loja Física</strong><span class="label label-default pull-right">14/10/2016</span>
+                                    
+                                    </h4>
+                                </div>
+                            </a>
                             <div id="collapseOne" class="panel-collapse collapse " role="tabpanel" aria-labelledby="headingOne">
                                 <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <strong>noticia</strong> tres <span class="label label-default pull-right">2016/03/02</span>
-                                </a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                Nosssa nova loja física será inaugurada em 2197, agradeçemos a todos que confiam em nosso trabalho, somente com seu apoio conseguimos dar esse passo para atender melhor suas necessidades. Em breve teremos novas novidades.
                                 </div>
                             </div>
                         </div>
@@ -135,11 +156,11 @@
                 <h2>Atualize seus dados </h2>
             </div>
                 <form method="POST" action="javascript:atualizarCliente();">
-                    <div class="form-group col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2">
+                    <div id="reload" class="form-group col-xs-12  col-sm-12 col-md-8 col-md-offset-2  col-lg-8 col-lg-offset-2">
                        <div class="row">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senhaA" id="senhaA" type="password" placeholder="Sua Senha Atual" maxlength="50">
+                                <input class="form-control" name="senhaA" id="senhaA" type="password" placeholder="Sua Senha Atual" maxlength="16">
                                 </div>
                                 <br> 
                         </div>
@@ -147,7 +168,7 @@
                          <div class="row">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-user fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="nome" id="nome" type="text" placeholder="Seu Nome" maxlength="50">
+                                <input class="form-control" name="nome" id="nome" type="text" placeholder="Seu Nome" maxlength="45">
                                 </div>
                                 <br>    
                         </div>
@@ -155,7 +176,7 @@
                         <div class="row">
                                 <div class="input-group">
                                 <div class="input-group-addon"><i class="fa fa-unlock-alt fa-1x" aria-hidden="true"></i></div>
-                                <input class="form-control" name="senha" id="senha" type="password" placeholder="Nova Senha" maxlength="50">
+                                <input class="form-control" name="senha" id="senha" type="password" placeholder="Nova Senha" maxlength="16">
                                 </div>
                                 <br>
                         </div>
