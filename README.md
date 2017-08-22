@@ -1,6 +1,7 @@
 # ProjetoApp
 
-SISTEMA PARA LOJA DE MANUTENÇÃO CJR, aplicação web para apresentação na Feira Cultural do Cecon de Belo Horizonte.
+SISTEMA PARA LOJA DE MANUTENÇÃO CJR, aplicação web para apresentação na Feira Cultural do Cecon de Belo Horizonte. Objetivo principal: Estudar PHP puro. Futura versão com CakePHP em breve.
+Hospedado em: http://cjr-aplicativo.16mb.com/
 
 ## Teamplate Usado
 
